@@ -1,12 +1,17 @@
 ﻿using JsonPropertyAdapter.Details;
 using JsonPropertyAdapter.Details.Interfaces;
 using JsonPropertyAdapter.Interfaces;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace JsonPropertyAdapter
 {
     public abstract class JsonEnumerableAdaptable<T_ListItem> : ISerializibleEnumerable<T_ListItem>
     {
+        [NotMapped]
         private IJsonEnumerableSerialize<T_ListItem> JsonSerializing { get; }
+
+        [NotMapped]
+        public IEnumerable<T_ListItem> VirtualEnumerable { get => JsonEnumerableDeserialize(); set => JsonEnumerableSerialize(value); }
 
         protected JsonEnumerableAdaptable(string? manualPropNameSet)
         {

@@ -1,12 +1,17 @@
 ﻿using JsonPropertyAdapter.Details;
 using JsonPropertyAdapter.Details.Interfaces;
 using JsonPropertyAdapter.Interfaces;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace JsonPropertyAdapter
 {
     public abstract class JsonDictionaryAdaptable<TKey, TValue> : ISerializibleDictionary<TKey, TValue>
     {
+        [NotMapped]
         private IJsonDictionarySerialize<TKey, TValue> JsonSerializing { get; }
+
+        [NotMapped]
+        public IDictionary<TKey, TValue> VirtualDictionary { get => JsonDictionaryDeserialize(); set => JsonDictionarySerialize(value); }
 
         protected JsonDictionaryAdaptable(string? manualPropNameSet)
         {
