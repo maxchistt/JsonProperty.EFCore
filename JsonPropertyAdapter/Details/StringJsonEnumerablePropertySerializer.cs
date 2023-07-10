@@ -13,11 +13,12 @@ namespace JsonPropertyAdapter.Details
         public IEnumerable<T> JsonEnumerableDeserialize()
         {
             var prop = GetProp();
-            if (string.IsNullOrEmpty(prop) && prop is not null)
-                throw new ArgumentException($"Empty string to get in {nameof(IJsonEnumerableSerialize<T>.JsonEnumerableSerialize)}");
-            IEnumerable<T> res = JsonSerializer.Deserialize<IEnumerable<T>>(prop ?? "[]") ??
-                throw new NullReferenceException($"{nameof(IJsonEnumerableSerialize<T>.JsonEnumerableSerialize)} get null fail");
-            return res;
+            if (!string.IsNullOrWhiteSpace(prop))
+            {
+                var res = JsonSerializer.Deserialize<IEnumerable<T>>(prop);
+                if (res is not null) return res;
+            }
+            return new T[0];
         }
 
         public void JsonEnumerableSerialize(IEnumerable<T> items)

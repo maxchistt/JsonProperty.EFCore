@@ -5,6 +5,7 @@ namespace JsonPropertyAdapter.Details
 {
     internal class StringJsonDictionaryPropertySerializer<TKey, TValue> :
         AbstractStringJsonPropertySerializer, IJsonDictionarySerialize<TKey, TValue>
+        where TKey : notnull
     {
         public StringJsonDictionaryPropertySerializer(object parent, string? propName) : base(parent, propName)
         {
@@ -22,11 +23,12 @@ namespace JsonPropertyAdapter.Details
         public IDictionary<TKey, TValue> JsonDictionaryDeserialize()
         {
             var prop = GetProp();
-            if (string.IsNullOrEmpty(prop) && prop is not null)
-                throw new ArgumentException($"Empty string to get in {nameof(IJsonDictionarySerialize<TKey, TValue>.JsonDictionarySerialize)}");
-            IDictionary<TKey, TValue> res = JsonSerializer.Deserialize<IDictionary<TKey, TValue>>(prop ?? "[]") ??
-                throw new NullReferenceException($"{nameof(IJsonDictionarySerialize<TKey, TValue>.JsonDictionarySerialize)} get null fail");
-            return res;
+            if (!string.IsNullOrEmpty(prop))
+            {
+                var res = JsonSerializer.Deserialize<IDictionary<TKey, TValue>>(prop);
+                if (res is not null) return res;
+            }
+            return new Dictionary<TKey, TValue>();
         }
     }
 }
