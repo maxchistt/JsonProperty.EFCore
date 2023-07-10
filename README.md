@@ -4,6 +4,12 @@
 
 This project allows you to use JSON fields in EF Core without setting up Fluent API
 
+| Id  | Name  | Price  | Params                                                             |
+| --- | ----- | ------ | ------------------------------------------------------------------ |
+| 1   | Phone | 500    | {"Camera":13.5,"OS":"Android 11","Screen":"1080x900","Storage":32} |
+| 2   | Car   | 100000 | {"MaxSpeed":300,"Engine capacity":6,"ElectroCar":false}            |
+| 3   | Bag   | 400    | {"Voliume":5,"Color":"Red"}                                        |
+
 ## Instruction
 
 Here are few steps how to use JsonPropertyAdapter project:
@@ -69,5 +75,5 @@ Here are few steps how to use JsonPropertyAdapter project:
    This will generate the following JSON data into the corresponding table string field:
 
    ```json
-   [ ... , { "Text": "MyTodoItemTitle", "CompleteStatus": false }]
+   [{ "Text": "MyTodoItemTitle", "CompleteStatus": false }]
    ```
