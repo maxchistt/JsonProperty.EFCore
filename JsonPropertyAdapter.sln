@@ -5,6 +5,8 @@ VisualStudioVersion = 17.6.33815.320
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JsonPropertyAdapter", "JsonPropertyAdapter\JsonPropertyAdapter.csproj", "{5445AE9A-3EB9-4D76-9E1C-42DB5813FFD4}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EF_Core_DEMO", "EF_Core_DEMO\EF_Core_DEMO.csproj", "{C4A0DFF0-09AE-4FB0-A05E-F3F11AC093DD}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{5445AE9A-3EB9-4D76-9E1C-42DB5813FFD4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5445AE9A-3EB9-4D76-9E1C-42DB5813FFD4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5445AE9A-3EB9-4D76-9E1C-42DB5813FFD4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C4A0DFF0-09AE-4FB0-A05E-F3F11AC093DD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C4A0DFF0-09AE-4FB0-A05E-F3F11AC093DD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C4A0DFF0-09AE-4FB0-A05E-F3F11AC093DD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C4A0DFF0-09AE-4FB0-A05E-F3F11AC093DD}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
