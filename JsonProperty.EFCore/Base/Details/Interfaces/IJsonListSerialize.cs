@@ -2,8 +2,8 @@
 {
     public interface IJsonListSerialize<T>
     {
-        public IList<T> JsonListDeserialize();
+        public IList<T> Deserialize();
 
-        public void JsonListSerialize(IList<T> items);
+        public void Serialize(IList<T> items);
     }
 }

@@ -11,7 +11,7 @@ namespace JsonProperty.EFCore.Base
         private IJsonEnumerableSerialize<T_ListItem> JsonSerializing { get; }
 
         [NotMapped]
-        public IEnumerable<T_ListItem> VirtualEnumerable { get => JsonEnumerableDeserialize(); set => JsonEnumerableSerialize(value); }
+        public IEnumerable<T_ListItem> VirtualEnumerable { get => Deserialize(); set => Serialize(value); }
 
         protected JsonEnumerableAdaptable(string? manualPropNameSet)
         {
@@ -34,18 +34,18 @@ namespace JsonProperty.EFCore.Base
 
         public void Edit(Func<IEnumerable<T_ListItem>, IEnumerable<T_ListItem>> EditingAction)
         {
-            IEnumerable<T_ListItem> res = EditingAction.Invoke(JsonSerializing.JsonEnumerableDeserialize());
-            JsonSerializing.JsonEnumerableSerialize(res);
+            IEnumerable<T_ListItem> res = EditingAction.Invoke(JsonSerializing.Deserialize());
+            JsonSerializing.Serialize(res);
         }
 
-        public IEnumerable<T_ListItem> JsonEnumerableDeserialize()
+        public IEnumerable<T_ListItem> Deserialize()
         {
-            return JsonSerializing.JsonEnumerableDeserialize();
+            return JsonSerializing.Deserialize();
         }
 
-        public void JsonEnumerableSerialize(IEnumerable<T_ListItem> items)
+        public void Serialize(IEnumerable<T_ListItem> items)
         {
-            JsonSerializing.JsonEnumerableSerialize(items);
+            JsonSerializing.Serialize(items);
         }
     }
 }

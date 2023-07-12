@@ -10,7 +10,7 @@ namespace JsonProperty.EFCore.Base.Details
         {
         }
 
-        public IList<T> JsonListDeserialize()
+        public IList<T> Deserialize()
         {
             var prop = GetProp();
             if (!string.IsNullOrWhiteSpace(prop))
@@ -21,12 +21,12 @@ namespace JsonProperty.EFCore.Base.Details
             return new T[0];
         }
 
-        public void JsonListSerialize(IList<T> items)
+        public void Serialize(IList<T> items)
         {
             string res = JsonSerializer.Serialize(items) ??
-                  throw new NullReferenceException($"{nameof(IJsonListSerialize<T>.JsonListSerialize)} set null fail");
+                  throw new NullReferenceException($"{nameof(IJsonListSerialize<T>.Serialize)} set null fail");
             if (string.IsNullOrEmpty(res))
-                throw new ArgumentException($"Empty string to set in {nameof(IJsonListSerialize<T>.JsonListSerialize)}");
+                throw new ArgumentException($"Empty string to set in {nameof(IJsonListSerialize<T>.Serialize)}");
             SetProp(res);
         }
     }

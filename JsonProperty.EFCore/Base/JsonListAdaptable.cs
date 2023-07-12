@@ -11,7 +11,7 @@ namespace JsonProperty.EFCore.Base
         private IJsonListSerialize<T_ListItem> JsonSerializing { get; }
 
         [NotMapped]
-        public IList<T_ListItem> VirtualList { get => JsonListDeserialize(); set => JsonListSerialize(value); }
+        public IList<T_ListItem> VirtualList { get => Deserialize(); set => Serialize(value); }
 
         protected JsonListAdaptable(string? manualPropNameSet)
         {
@@ -44,27 +44,27 @@ namespace JsonProperty.EFCore.Base
 
         public void Edit(Func<IList<T_ListItem>, IList<T_ListItem>> EditingAction)
         {
-            JsonSerializing.JsonListSerialize(EditingAction.Invoke(JsonSerializing.JsonListDeserialize()));
+            JsonSerializing.Serialize(EditingAction.Invoke(JsonSerializing.Deserialize()));
         }
 
-        public IList<T_ListItem> JsonListDeserialize()
+        public IList<T_ListItem> Deserialize()
         {
-            return JsonSerializing.JsonListDeserialize();
+            return JsonSerializing.Deserialize();
         }
 
-        public void JsonListSerialize(IList<T_ListItem> items)
+        public void Serialize(IList<T_ListItem> items)
         {
-            JsonSerializing.JsonListSerialize(items);
+            JsonSerializing.Serialize(items);
         }
 
         public void Edit(Func<IList<T_ListItem>, IEnumerable<T_ListItem>> EditingAction)
         {
-            JsonSerializing.JsonListSerialize(EditingAction.Invoke(JsonSerializing.JsonListDeserialize()).ToList());
+            JsonSerializing.Serialize(EditingAction.Invoke(JsonSerializing.Deserialize()).ToList());
         }
 
         public void Edit(Func<IEnumerable<T_ListItem>, IEnumerable<T_ListItem>> EditingAction)
         {
-            JsonSerializing.JsonListSerialize(EditingAction.Invoke(JsonSerializing.JsonListDeserialize()).ToList());
+            JsonSerializing.Serialize(EditingAction.Invoke(JsonSerializing.Deserialize()).ToList());
         }
 
         public void AddRange(IEnumerable<T_ListItem> items)

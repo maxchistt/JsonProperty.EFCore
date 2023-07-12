@@ -69,10 +69,10 @@ void PrintData()
             Console.WriteLine($"{Indent(2)} Price: {product.Price}");
             Console.WriteLine($"{Indent(2)} Amount: {product.Amount}");
             Console.WriteLine($"{Indent(2)} ParametersJSON: {product.Parameters.JsonString}");
-            if (product.Parameters.JsonDictionaryDeserialize().Any())
+            if (product.Parameters.Deserialize().Any())
             {
                 Console.WriteLine($"{Indent(3)} Parameters items:");
-                foreach (var keyValuePair in product.Parameters.JsonDictionaryDeserialize())
+                foreach (var keyValuePair in product.Parameters.Deserialize())
                 {
                     Console.WriteLine($"{Indent(4)} Key: '{keyValuePair.Key}' Value: '{keyValuePair.Value}' Type: '{keyValuePair.Value.GetType().Name}'");
                 }

@@ -11,7 +11,7 @@ namespace JsonProperty.EFCore.Base
         private IJsonDictionarySerialize<TKey, TValue> JsonSerializing { get; }
 
         [NotMapped]
-        public IDictionary<TKey, TValue> VirtualDictionary { get => JsonDictionaryDeserialize(); set => JsonDictionarySerialize(value); }
+        public IDictionary<TKey, TValue> VirtualDictionary { get => Deserialize(); set => Serialize(value); }
 
         protected JsonDictionaryAdaptable(string? manualPropNameSet)
         {
@@ -22,19 +22,19 @@ namespace JsonProperty.EFCore.Base
         {
         }
 
-        public IDictionary<TKey, TValue> JsonDictionaryDeserialize()
+        public IDictionary<TKey, TValue> Deserialize()
         {
-            return JsonSerializing.JsonDictionaryDeserialize();
+            return JsonSerializing.Deserialize();
         }
 
-        public void JsonDictionarySerialize(IDictionary<TKey, TValue> items)
+        public void Serialize(IDictionary<TKey, TValue> items)
         {
-            JsonSerializing.JsonDictionarySerialize(items);
+            JsonSerializing.Serialize(items);
         }
 
         public void Edit(Func<IDictionary<TKey, TValue>, IDictionary<TKey, TValue>> EditingAction)
         {
-            JsonSerializing.JsonDictionarySerialize(EditingAction.Invoke(JsonSerializing.JsonDictionaryDeserialize()));
+            JsonSerializing.Serialize(EditingAction.Invoke(JsonSerializing.Deserialize()));
         }
 
         public void AddRange(IDictionary<TKey, TValue> items)
@@ -58,17 +58,17 @@ namespace JsonProperty.EFCore.Base
         public void Edit(Func<IDictionary<TKey, TValue>, IEnumerable<KeyValuePair<TKey, TValue>>> EditingAction)
         {
             Dictionary<TKey, TValue> dict = new();
-            var res = EditingAction.Invoke(JsonSerializing.JsonDictionaryDeserialize());
+            var res = EditingAction.Invoke(JsonSerializing.Deserialize());
             res.ToList().ForEach(x => dict.Add(x.Key, x.Value));
-            JsonSerializing.JsonDictionarySerialize(dict);
+            JsonSerializing.Serialize(dict);
         }
 
         public void Edit(Func<IEnumerable<KeyValuePair<TKey, TValue>>, IEnumerable<KeyValuePair<TKey, TValue>>> EditingAction)
         {
             Dictionary<TKey, TValue> dict = new();
-            var res = EditingAction.Invoke(JsonSerializing.JsonDictionaryDeserialize());
+            var res = EditingAction.Invoke(JsonSerializing.Deserialize());
             res.ToList().ForEach(x => dict.Add(x.Key, x.Value));
-            JsonSerializing.JsonDictionarySerialize(dict);
+            JsonSerializing.Serialize(dict);
         }
 
         public void AddRange(IEnumerable<KeyValuePair<TKey, TValue>> items)

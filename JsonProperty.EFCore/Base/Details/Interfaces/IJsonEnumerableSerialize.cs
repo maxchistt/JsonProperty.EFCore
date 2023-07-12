@@ -2,8 +2,8 @@
 {
     public interface IJsonEnumerableSerialize<T>
     {
-        public IEnumerable<T> JsonEnumerableDeserialize();
+        public IEnumerable<T> Deserialize();
 
-        public void JsonEnumerableSerialize(IEnumerable<T> items);
+        public void Serialize(IEnumerable<T> items);
     }
 }

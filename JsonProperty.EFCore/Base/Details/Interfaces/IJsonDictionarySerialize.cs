@@ -2,8 +2,8 @@
 {
     public interface IJsonDictionarySerialize<TKey, TValue>
     {
-        public IDictionary<TKey, TValue> JsonDictionaryDeserialize();
+        public IDictionary<TKey, TValue> Deserialize();
 
-        public void JsonDictionarySerialize(IDictionary<TKey, TValue> items);
+        public void Serialize(IDictionary<TKey, TValue> items);
     }
 }
