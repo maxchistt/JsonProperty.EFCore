@@ -17,7 +17,7 @@ Here are few steps how to use JsonPropertyAdapter project:
 1. **Connect the project and specify 'using'**
 
    ```cs
-   using JsonPropertyAdapter.EFCore;
+   using JsonPropertyAdapter;
    ```
 
 1. **Create entity model**
