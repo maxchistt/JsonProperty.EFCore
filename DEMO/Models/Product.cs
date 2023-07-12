@@ -1,7 +1,7 @@
-﻿using JsonPropertyAdapter.EFCore;
+﻿using JsonPropertyAdapter;
 using System.ComponentModel.DataAnnotations;
 
-namespace EF_Core_DEMO.Models
+namespace DEMO.Models
 {
     public class Product
     {

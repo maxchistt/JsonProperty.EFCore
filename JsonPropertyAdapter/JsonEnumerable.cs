@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 
-namespace JsonPropertyAdapter.EFCore
+namespace JsonPropertyAdapter
 {
     [Owned]
     public class JsonEnumerable : JsonEnumerable<object>

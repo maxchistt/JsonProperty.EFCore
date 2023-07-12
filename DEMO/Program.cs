@@ -1,5 +1,5 @@
-﻿using EF_Core_DEMO.Context;
-using EF_Core_DEMO.Models;
+﻿using DEMO.Context;
+using DEMO.Models;
 
 RecreateDatabase();
 FillData();

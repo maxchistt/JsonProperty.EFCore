@@ -1,7 +1,7 @@
-﻿using EF_Core_DEMO.Models;
+﻿using DEMO.Models;
 using Microsoft.EntityFrameworkCore;
 
-namespace EF_Core_DEMO.Context
+namespace DEMO.Context
 {
     public class DataContext : Microsoft.EntityFrameworkCore.DbContext
     {
@@ -14,7 +14,7 @@ namespace EF_Core_DEMO.Context
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlite($"Data Source={nameof(EF_Core_DEMO)} Sqlite.db");
+            optionsBuilder.UseSqlite($"Data Source={nameof(DEMO)} Sqlite.db");
         }
     }
 }
