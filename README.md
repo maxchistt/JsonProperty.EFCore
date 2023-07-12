@@ -53,9 +53,9 @@ Here are few steps how to use JsonPropertyAdapter project:
    }
    ```
 
-1. **Add JSON field property of type `JsonEntity` or `JsonDictionary` to your entity model**
+1. **Add JSON field property of type `JsonEntity`, `JsonList` or `JsonDictionary` to your entity model**
 
-   You can use the basic type `JsonEntity` or `JsonDictionary` which uses elements of type object
+   You can use the basic type like `JsonEntity` or `JsonDictionary` which uses elements of type object
 
    ```cs
    public class Product
@@ -69,7 +69,7 @@ Here are few steps how to use JsonPropertyAdapter project:
    }
    ```
 
-   Or add property of type `JsonEnumerable<T>` or `JsonDictionary<TKey, TValue>` with custom element type
+   Or add property of generic type like `JsonEnumerable<T>` or `JsonDictionary<TKey, TValue>` with custom element type
 
    ```cs
    public class Note
