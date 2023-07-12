@@ -3,9 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.6.33815.320
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JsonPropertyAdapter", "JsonPropertyAdapter\JsonPropertyAdapter.csproj", "{5445AE9A-3EB9-4D76-9E1C-42DB5813FFD4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "JsonPropertyAdapter", "JsonPropertyAdapter\JsonPropertyAdapter.csproj", "{5445AE9A-3EB9-4D76-9E1C-42DB5813FFD4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EF_Core_DEMO", "EF_Core_DEMO\EF_Core_DEMO.csproj", "{C4A0DFF0-09AE-4FB0-A05E-F3F11AC093DD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EF_Core_DEMO", "EF_Core_DEMO\EF_Core_DEMO.csproj", "{C4A0DFF0-09AE-4FB0-A05E-F3F11AC093DD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JsonPropertyAdapter.EFCore", "JsonPropertyAdapter.EFCore\JsonPropertyAdapter.EFCore.csproj", "{B049824C-71EB-4255-B126-8EEEA906AC09}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{C4A0DFF0-09AE-4FB0-A05E-F3F11AC093DD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C4A0DFF0-09AE-4FB0-A05E-F3F11AC093DD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C4A0DFF0-09AE-4FB0-A05E-F3F11AC093DD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B049824C-71EB-4255-B126-8EEEA906AC09}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B049824C-71EB-4255-B126-8EEEA906AC09}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B049824C-71EB-4255-B126-8EEEA906AC09}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B049824C-71EB-4255-B126-8EEEA906AC09}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
