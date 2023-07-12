@@ -1,0 +1,27 @@
+name: Release to NuGet
+
+on:
+  release:
+    types: [published]
+    
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v2
+    - name: Setup .NET SDK
+      uses: actions/setup-dotnet@v1
+    - name: Build
+      working-directory: ./JsonProperty.EFCore
+      run: dotnet build -c Release
+#    - name: Test
+#      working-directory: ./JsonProperty.EFCore
+#      run: dotnet test -c Release --no-build
+    - name: Pack nugets
+      working-directory: ./JsonProperty.EFCore
+      run: dotnet pack -c Release --no-build --output .
+    - name: Push to NuGet
+      working-directory: ./JsonProperty.EFCore
+      run: dotnet nuget push "*.nupkg" --api-key ${{secrets.NUGET_APIKEY}} --source https://api.nuget.org/v3/index.json
