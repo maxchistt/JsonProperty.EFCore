@@ -1,10 +1,9 @@
-﻿using JsonPropertyAdapter.EFCore.Base;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 
 namespace JsonPropertyAdapter.EFCore
 {
     [Owned]
-    public class JsonDictionary : JsonDictionaryBase<string, object>
+    public class JsonDictionary : JsonDictionary<string, object>
     {
     }
 }

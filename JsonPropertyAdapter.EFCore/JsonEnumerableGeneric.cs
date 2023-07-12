@@ -2,15 +2,15 @@
 using Microsoft.EntityFrameworkCore;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace JsonPropertyAdapter.EFCore.Base
+namespace JsonPropertyAdapter.EFCore
 {
     [Owned]
-    public abstract class JsonDictionaryBase<TKey, TValue> : JsonDictionaryAdaptable<TKey, TValue> where TKey : notnull
+    public class JsonEnumerable<T> : JsonEnumerableAdaptable<T>
     {
         [Column]
         public string? JsonString { get; set; }
 
-        public JsonDictionaryBase() : base(nameof(JsonString))
+        public JsonEnumerable() : base(nameof(JsonString))
         {
         }
     }
