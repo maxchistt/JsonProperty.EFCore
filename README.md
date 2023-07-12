@@ -17,120 +17,104 @@ Here are few steps how to use JsonPropertyAdapter project:
 1. **Connect the project and specify 'using'**
 
    ```cs
-    using JsonPropertyAdapter;
+   using JsonPropertyAdapter.EFCore;
    ```
 
 1. **Create entity model**
 
    ```cs
-    public class Note
-    {
-        [Key, Required]
-        public int Id { get; set; }
-        public string? Header { get; set; }
-    }
+   public class Product
+   {
+       [Key, Required]
+       public int Id { get; set; }
+       public string? Name { get; set; }
+       public decimal? Price { get; set; }
+   }
    ```
 
    Or
 
    ```cs
-    public class Product
-    {
-        [Key, Required]
-        public int Id { get; set; }
-        public string? Name { get; set; }
-        public decimal? Price { get; set; }
-    }
+   public class Note
+   {
+       [Key, Required]
+       public int Id { get; set; }
+       public string? Header { get; set; }
+   }
    ```
 
-1. **Create a JSON collection item class if nessesary**
+1. **Create a JSON collection item class if necessary**
 
    ```cs
-    public class TodoItem
-    {
-        public string? Text { get; set; }
-        public bool? CompleteStatus { get; set; }
-    }
+   public class TodoItem
+   {
+       public string? Text { get; set; }
+       public bool? CompleteStatus { get; set; }
+   }
    ```
 
-1. **Create a JSON field class that inherits from the `JsonEnumerableAdaptable` or `JsonDictionaryAdaptable` class with one <span style="text-decoration:underline">string</span> property and an <span style="text-decoration:underline">"Owned"</span> attribute.**
+1. **If necessary, create a JSON field class that inherits from the `JsonEnumerableBase<T>` or `JsonDictionaryBase<TKey, TValue>` class with an "Owned" attribute.**
 
    ```cs
-    [Owned]
-    public class JsonTodoItems : JsonEnumerableAdaptable<TodoItem>
-    {
-        [Column("JsonTodoItemsList")]
-        public string? JsonListString { get; set; }
-    }
+   [Owned]
+   public class JsonTodoItems : JsonEnumerableBase<TodoItem> {}
    ```
 
-   Or
+1. **Add JSON field property of type `JsonEntity` or `JsonDictionary` to your entity model**
 
    ```cs
-    [Owned]
-    public class JsonParamsDictionary : JsonDictionaryAdaptable<string, object>
-    {
-        [Column("JsonParametersDictionary")]
-        public string? JsonDictString { get; set; }
-    }
+   public class Product
+   {
+       [Key, Required]
+       public int Id { get; set; }
+       public string? Name { get; set; }
+       public decimal? Price { get; set; }
+
+       public JsonDictionary Parameters { get; set; } = new();
+   }
    ```
 
-1. **Add your JSON field class to entity model as a property**
+   Or add property of your custom type
 
    ```cs
-    public class Note
-    {
-        [Key, Required]
-        public int Id { get; set; }
-        public string? Header { get; set; }
+   public class Note
+   {
+       [Key, Required]
+       public int Id { get; set; }
+       public string? Header { get; set; }
 
-        public JsonTodoItems Todos { get; set; } = new();
-    }
-   ```
-
-   Or
-
-   ```cs
-    public class Product
-    {
-        [Key, Required]
-        public int Id { get; set; }
-        public string? Name { get; set; }
-        public decimal? Price { get; set; }
-
-        public JsonParamsDictionary Parameters { get; set; } = new();
-    }
+       public JsonTodoItems Todos { get; set; } = new();
+   }
    ```
 
 1. **Usage example:**
-
-   Here is example for `JsonEnumerableAdaptable`
+   Here is example for `JsonDictionary`
 
    ```cs
-    Note note = db.Notes.FirstOrDefault();
-    note.Todos.Edit(en => en.Append(new("MyTodoItemTitle")));
+   Product product = new() {Name="Phone",Price=500.95m,Amount=21,Parameters={
+       VirtualDictionary = new Dictionary<string,object>() {
+           {"Camera",13.5 },{"OS","Android" },{"Screen","1080x900"},{"Storage",32}
+       }
+   }};
+   db.Goods.Add(product);
+   db.SaveChanges();
    ```
 
    This will generate the following JSON data into the corresponding table string field:
 
    ```
-   [ ... , { "Text": "MyTodoItemTitle", "CompleteStatus": false }]
+   { "Camera": 13.5, "OS": "Android", "Screen": "1080x900", "Storage": 32 }
    ```
 
-   And here is example for `JsonDictionaryAdaptable`
+   And here is example for `JsonEnumerable`
 
    ```cs
-    Product product = new() {Name="Phone",Price=500.95m,Amount=21,Parameters={
-        VirtualDictionary = new Dictionary<string,object>() {
-            {"Camera",13.5 },{"OS","Android" },{"Screen","1080x900"},{"Storage",32}
-        }
-    }};
-    db.Goods.Add(product);
-    db.SaveChanges();
+   Note note = db.Notes.FirstOrDefault();
+   note.Todos.Edit(en => en.Append(new("MyTodoItemTitle")));
    ```
 
    And here is also the result in JSON:
 
    ```
-   { "Camera": 13.5, "OS": "Android", "Screen": "1080x900", "Storage": 32 }
+   [ ... , { "Text": "MyTodoItemTitle", "CompleteStatus": false }]
    ```
