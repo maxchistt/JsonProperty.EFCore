@@ -1,4 +1,4 @@
-﻿namespace JsonPropertyAdapter.Details.Interfaces
+﻿namespace JsonPropertyAdapter.Base.Details.Interfaces
 {
     public interface IEditableEnumerable<T>
     {

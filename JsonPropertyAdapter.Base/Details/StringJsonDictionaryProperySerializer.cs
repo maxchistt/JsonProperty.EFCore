@@ -1,7 +1,7 @@
-﻿using JsonPropertyAdapter.Details.Interfaces;
+﻿using JsonPropertyAdapter.Base.Details.Interfaces;
 using System.Text.Json;
 
-namespace JsonPropertyAdapter.Details
+namespace JsonPropertyAdapter.Base.Details
 {
     internal class StringJsonDictionaryPropertySerializer<TKey, TValue> :
         AbstractStringJsonPropertySerializer, IJsonDictionarySerialize<TKey, TValue>

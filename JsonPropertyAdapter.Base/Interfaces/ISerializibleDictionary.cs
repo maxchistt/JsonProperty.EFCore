@@ -1,6 +1,6 @@
-﻿using JsonPropertyAdapter.Details.Interfaces;
+﻿using JsonPropertyAdapter.Base.Details.Interfaces;
 
-namespace JsonPropertyAdapter.Interfaces
+namespace JsonPropertyAdapter.Base.Interfaces
 {
     public interface ISerializibleDictionary<TKey, TValue> : IJsonDictionarySerialize<TKey, TValue>, IEditableDictionary<TKey, TValue>
     {

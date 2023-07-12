@@ -1,4 +1,4 @@
-﻿using JsonPropertyAdapter;
+﻿using JsonPropertyAdapter.Base;
 using Microsoft.EntityFrameworkCore;
 using System.ComponentModel.DataAnnotations.Schema;
 

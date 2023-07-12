@@ -1,9 +1,9 @@
-﻿using JsonPropertyAdapter.Details;
-using JsonPropertyAdapter.Details.Interfaces;
-using JsonPropertyAdapter.Interfaces;
+﻿using JsonPropertyAdapter.Base.Details;
+using JsonPropertyAdapter.Base.Details.Interfaces;
+using JsonPropertyAdapter.Base.Interfaces;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace JsonPropertyAdapter
+namespace JsonPropertyAdapter.Base
 {
     public abstract class JsonEnumerableAdaptable<T_ListItem> : ISerializibleEnumerable<T_ListItem>
     {

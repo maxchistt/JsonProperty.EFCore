@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.6.33815.320
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "JsonPropertyAdapter", "JsonPropertyAdapter\JsonPropertyAdapter.csproj", "{5445AE9A-3EB9-4D76-9E1C-42DB5813FFD4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "JsonPropertyAdapter.Base", "JsonPropertyAdapter.Base\JsonPropertyAdapter.Base.csproj", "{5445AE9A-3EB9-4D76-9E1C-42DB5813FFD4}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EF_Core_DEMO", "EF_Core_DEMO\EF_Core_DEMO.csproj", "{C4A0DFF0-09AE-4FB0-A05E-F3F11AC093DD}"
 EndProject
