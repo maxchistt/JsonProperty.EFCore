@@ -5,7 +5,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace JsonPropertyAdapter.Base
 {
-    public abstract class JsonDictionaryAdaptable<TKey, TValue> : ISerializibleDictionary<TKey, TValue>
+    public abstract class JsonDictionaryAdaptable<TKey, TValue> : ISerializibleDictionary<TKey, TValue> where TKey : notnull
     {
         [NotMapped]
         private IJsonDictionarySerialize<TKey, TValue> JsonSerializing { get; }
@@ -34,8 +34,7 @@ namespace JsonPropertyAdapter.Base
 
         public void Edit(Func<IDictionary<TKey, TValue>, IDictionary<TKey, TValue>> EditingAction)
         {
-            IDictionary<TKey, TValue> res = EditingAction.Invoke(JsonSerializing.JsonDictionaryDeserialize());
-            JsonSerializing.JsonDictionarySerialize(res);
+            JsonSerializing.JsonDictionarySerialize(EditingAction.Invoke(JsonSerializing.JsonDictionaryDeserialize()));
         }
 
         public void AddRange(IDictionary<TKey, TValue> items)
@@ -52,6 +51,40 @@ namespace JsonPropertyAdapter.Base
             Edit(en =>
             {
                 en.Add(key, item);
+                return en;
+            });
+        }
+
+        public void Edit(Func<IDictionary<TKey, TValue>, IEnumerable<KeyValuePair<TKey, TValue>>> EditingAction)
+        {
+            Dictionary<TKey, TValue> dict = new();
+            var res = EditingAction.Invoke(JsonSerializing.JsonDictionaryDeserialize());
+            res.ToList().ForEach(x => dict.Add(x.Key, x.Value));
+            JsonSerializing.JsonDictionarySerialize(dict);
+        }
+
+        public void Edit(Func<IEnumerable<KeyValuePair<TKey, TValue>>, IEnumerable<KeyValuePair<TKey, TValue>>> EditingAction)
+        {
+            Dictionary<TKey, TValue> dict = new();
+            var res = EditingAction.Invoke(JsonSerializing.JsonDictionaryDeserialize());
+            res.ToList().ForEach(x => dict.Add(x.Key, x.Value));
+            JsonSerializing.JsonDictionarySerialize(dict);
+        }
+
+        public void AddRange(IEnumerable<KeyValuePair<TKey, TValue>> items)
+        {
+            Edit(en =>
+            {
+                items.ToList().ForEach(x => en.Add(x.Key, x.Value));
+                return en;
+            });
+        }
+
+        public void Add(KeyValuePair<TKey, TValue> item)
+        {
+            Edit(en =>
+            {
+                en.Add(item);
                 return en;
             });
         }
