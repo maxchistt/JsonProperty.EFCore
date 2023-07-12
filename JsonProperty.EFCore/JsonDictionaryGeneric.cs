@@ -1,8 +1,8 @@
-﻿using JsonPropertyAdapter.Base;
+﻿using JsonProperty.EFCore.Base;
 using Microsoft.EntityFrameworkCore;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace JsonPropertyAdapter
+namespace JsonProperty.EFCore
 {
     [Owned]
     public class JsonDictionary<TKey, TValue> : JsonDictionaryAdaptable<TKey, TValue> where TKey : notnull

@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.6.33815.320
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "JsonPropertyAdapter", "JsonPropertyAdapter\JsonPropertyAdapter.csproj", "{FE72A0B6-5327-413C-AD7C-276D5A87BF7D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "JsonProperty.EFCore", "JsonProperty.EFCore\JsonProperty.EFCore.csproj", "{FE72A0B6-5327-413C-AD7C-276D5A87BF7D}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DEMO", "DEMO\DEMO.csproj", "{026705A4-F775-49C3-93FF-04FF3249B860}"
 EndProject
@@ -24,5 +24,8 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {8BDAB437-DA82-4B22-8B43-4CD30B421522}
 	EndGlobalSection
 EndGlobal

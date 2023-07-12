@@ -13,7 +13,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\JsonPropertyAdapter\JsonPropertyAdapter.csproj" />
+    <ProjectReference Include="..\JsonProperty.EFCore\JsonProperty.EFCore.csproj" />
   </ItemGroup>
 
 </Project>

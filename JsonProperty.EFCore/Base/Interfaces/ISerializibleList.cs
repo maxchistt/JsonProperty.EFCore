@@ -1,6 +1,6 @@
-﻿using JsonPropertyAdapter.Base.Details.Interfaces;
+﻿using JsonProperty.EFCore.Base.Details.Interfaces;
 
-namespace JsonPropertyAdapter.Base.Interfaces
+namespace JsonProperty.EFCore.Base.Interfaces
 {
     public interface ISerializibleList<T> : IJsonListSerialize<T>, IEditableList<T>
     {

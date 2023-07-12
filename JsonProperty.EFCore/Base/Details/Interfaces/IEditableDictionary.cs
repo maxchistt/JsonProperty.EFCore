@@ -1,4 +1,4 @@
-﻿namespace JsonPropertyAdapter.Base.Details.Interfaces
+﻿namespace JsonProperty.EFCore.Base.Details.Interfaces
 {
     public interface IEditableDictionary<TKey, TValue> : IEditableEnumerable<KeyValuePair<TKey, TValue>>
     {

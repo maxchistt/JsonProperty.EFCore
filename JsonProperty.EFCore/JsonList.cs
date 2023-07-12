@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 
-namespace JsonPropertyAdapter
+namespace JsonProperty.EFCore
 {
     [Owned]
     public class JsonList : JsonList<object>

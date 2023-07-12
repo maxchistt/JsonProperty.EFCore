@@ -1,6 +1,6 @@
 ﻿using System.Reflection;
 
-namespace JsonPropertyAdapter.Base.Details
+namespace JsonProperty.EFCore.Base.Details
 {
     internal abstract class AbstractStringJsonPropertySerializer
     {

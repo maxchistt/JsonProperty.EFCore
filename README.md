@@ -1,4 +1,4 @@
-# JsonPropertyAdapter
+# JsonProperty.EFCore
 
 ## About
 
@@ -12,12 +12,12 @@ This project allows you to use JSON fields in EF Core without setting up Fluent 
 
 ## Instruction
 
-Here are few steps how to use JsonPropertyAdapter project:
+Here are few steps how to use JsonProperty.EFCore project:
 
 1. **Connect the project and specify 'using'**
 
    ```cs
-   using JsonPropertyAdapter;
+   using JsonProperty.EFCore;
    ```
 
 1. **Create entity model**

@@ -1,7 +1,7 @@
-﻿using JsonPropertyAdapter.Base.Details.Interfaces;
+﻿using JsonProperty.EFCore.Base.Details.Interfaces;
 using System.Text.Json;
 
-namespace JsonPropertyAdapter.Base.Details
+namespace JsonProperty.EFCore.Base.Details
 {
     internal class StringJsonListPropertySerializer<T> :
         AbstractStringJsonPropertySerializer, IJsonListSerialize<T>

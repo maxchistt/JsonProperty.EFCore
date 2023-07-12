@@ -1,4 +1,4 @@
-﻿using JsonPropertyAdapter;
+﻿using JsonProperty.EFCore;
 using System.ComponentModel.DataAnnotations;
 
 namespace DEMO.Models

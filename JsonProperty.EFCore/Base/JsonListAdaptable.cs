@@ -1,9 +1,9 @@
-﻿using JsonPropertyAdapter.Base.Details;
-using JsonPropertyAdapter.Base.Details.Interfaces;
-using JsonPropertyAdapter.Base.Interfaces;
+﻿using JsonProperty.EFCore.Base.Details;
+using JsonProperty.EFCore.Base.Details.Interfaces;
+using JsonProperty.EFCore.Base.Interfaces;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace JsonPropertyAdapter.Base
+namespace JsonProperty.EFCore.Base
 {
     public abstract class JsonListAdaptable<T_ListItem> : ISerializibleList<T_ListItem>
     {
