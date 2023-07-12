@@ -38,13 +38,6 @@ namespace JsonPropertyAdapter.Base
             JsonSerializing.JsonEnumerableSerialize(res);
         }
 
-        public void Edit(Action<IEnumerable<T_ListItem>> EditingAction)
-        {
-            IEnumerable<T_ListItem> enumerable = JsonSerializing.JsonEnumerableDeserialize();
-            EditingAction.Invoke(enumerable);
-            JsonSerializing.JsonEnumerableSerialize(enumerable);
-        }
-
         public IEnumerable<T_ListItem> JsonEnumerableDeserialize()
         {
             return JsonSerializing.JsonEnumerableDeserialize();

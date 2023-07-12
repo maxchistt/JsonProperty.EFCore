@@ -38,21 +38,22 @@ namespace JsonPropertyAdapter.Base
             JsonSerializing.JsonDictionarySerialize(res);
         }
 
-        public void Edit(Action<IDictionary<TKey, TValue>> EditingAction)
-        {
-            IDictionary<TKey, TValue> enumerable = JsonSerializing.JsonDictionaryDeserialize();
-            EditingAction.Invoke(enumerable);
-            JsonSerializing.JsonDictionarySerialize(enumerable);
-        }
-
         public void AddRange(IDictionary<TKey, TValue> items)
         {
-            Edit(en => en.Concat(items));
+            Edit(en =>
+            {
+                items.ToList().ForEach(x => en.Add(x.Key, x.Value));
+                return en;
+            });
         }
 
         public void Add(TKey key, TValue item)
         {
-            Edit(en => en.Add(key, item));
+            Edit(en =>
+            {
+                en.Add(key, item);
+                return en;
+            });
         }
     }
 }
