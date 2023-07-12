@@ -16,9 +16,9 @@ jobs:
     - name: Build
       working-directory: ./JsonProperty.EFCore
       run: dotnet build -c Release
-#    - name: Test
-#      working-directory: ./JsonProperty.EFCore
-#      run: dotnet test -c Release --no-build
+    - name: Test
+      working-directory: ./JsonProperty.EFCore.Tests
+      run: dotnet test -c Release
     - name: Pack nugets
       working-directory: ./JsonProperty.EFCore
       run: dotnet pack -c Release --no-build --output .
