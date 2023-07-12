@@ -1,5 +1,7 @@
 # JsonProperty.EFCore
 
+[![Version](https://img.shields.io/nuget/vpre/JsonProperty.EFCore.svg)](https://www.nuget.org/packages/JsonProperty.EFCore)
+
 ## About
 
 This project allows you to use JSON fields in EF Core without setting up Fluent API
