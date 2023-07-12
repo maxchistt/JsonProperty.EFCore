@@ -8,12 +8,12 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="7.0.8" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="7.0.8" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="7.0.9" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="7.0.9" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\JsonPropertyAdapter.Base\JsonPropertyAdapter.Base.csproj" />
+    <ProjectReference Include="..\JsonPropertyAdapter.EFCore\JsonPropertyAdapter.EFCore.csproj" />
   </ItemGroup>
 
 </Project>

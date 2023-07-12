@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using JsonPropertyAdapter.EFCore;
+using System.ComponentModel.DataAnnotations;
 
 namespace EF_Core_DEMO.Models
 {
@@ -10,6 +11,6 @@ namespace EF_Core_DEMO.Models
         public string? Name { get; set; }
         public decimal? Price { get; set; }
         public ushort? Amount { get; set; }
-        public JsonObjectParamsDictionary Parameters { get; set; } = new();
+        public JsonDictionary Parameters { get; set; } = new();
     }
 }
