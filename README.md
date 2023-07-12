@@ -53,14 +53,9 @@ Here are few steps how to use JsonPropertyAdapter project:
    }
    ```
 
-1. **If necessary, create a JSON field class that inherits from the `JsonEnumerableBase<T>` or `JsonDictionaryBase<TKey, TValue>` class with an "Owned" attribute.**
-
-   ```cs
-   [Owned]
-   public class JsonTodoItems : JsonEnumerableBase<TodoItem> {}
-   ```
-
 1. **Add JSON field property of type `JsonEntity` or `JsonDictionary` to your entity model**
+
+   You can use the basic type `JsonEntity` or `JsonDictionary` which uses elements of type object
 
    ```cs
    public class Product
@@ -74,7 +69,7 @@ Here are few steps how to use JsonPropertyAdapter project:
    }
    ```
 
-   Or add property of your custom type
+   Or add property of type `JsonEnumerable<T>` or `JsonDictionary<TKey, TValue>` with custom element type
 
    ```cs
    public class Note
@@ -83,11 +78,12 @@ Here are few steps how to use JsonPropertyAdapter project:
        public int Id { get; set; }
        public string? Header { get; set; }
 
-       public JsonTodoItems Todos { get; set; } = new();
+       public JsonEnumerable<TodoItem> Todos { get; set; } = new();
    }
    ```
 
 1. **Usage example:**
+
    Here is example for `JsonDictionary`
 
    ```cs
@@ -106,7 +102,7 @@ Here are few steps how to use JsonPropertyAdapter project:
    { "Camera": 13.5, "OS": "Android", "Screen": "1080x900", "Storage": 32 }
    ```
 
-   And here is example for `JsonEnumerable`
+   And here is example for `JsonEnumerable<T>`
 
    ```cs
    Note note = db.Notes.FirstOrDefault();
