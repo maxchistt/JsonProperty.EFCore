@@ -11,24 +11,26 @@ namespace JsonProperty.EFCore.Tests.TestsByType
         public void TestEnumerable()
         {
             Console.WriteLine(nameof(TestEnumerable));
-
-            Set.Enumerable.Add(vals[0]);
-            Set.Enumerable.Edit(en => en.Append(vals[1]));
-            Set.Enumerable.AddRange(new string[] { vals[2], vals[3] });
-
-            for (int i = 0; i < vals.Length; i++)
+            Assert.DoesNotThrow(() =>
             {
-                Assert.IsTrue(vals[i] == Set.Enumerable.Deserialize().ElementAt(i), "1) Assert.IsTrue(vals[i] == Set.Enumerable.Deserialize().ElementAt(i)");
-            }
+                Set.Enumerable.Add(vals[0]);
+                Set.Enumerable.Edit(en => en.Append(vals[1]));
+                Set.Enumerable.AddRange(new string[] { vals[2], vals[3] });
 
-            //Assert.That(Set.Enumerable.JsonString == JsonSerializer.Serialize(vals), "2) Set.Enumerable.JsonString == JsonSerializer.Serialize(vals)");
+                for (int i = 0; i < vals.Length; i++)
+                {
+                    Assert.IsTrue(vals[i] == Set.Enumerable.Deserialize().ElementAt(i), "1) Assert.IsTrue(vals[i] == Set.Enumerable.Deserialize().ElementAt(i)");
+                }
 
-            Set.Enumerable.Serialize(vals);
+                //Assert.That(Set.Enumerable.JsonString == JsonSerializer.Serialize(vals), "2) Set.Enumerable.JsonString == JsonSerializer.Serialize(vals)");
 
-            for (int i = 0; i < vals.Length; i++)
-            {
-                Assert.IsTrue(vals[i] == Set.Enumerable.VirtualEnumerable.ElementAt(i), "3) vals[i] == Set.Enumerable.VirtualEnumerable.ElementAt(i)");
-            }
+                Set.Enumerable.Serialize(vals);
+
+                for (int i = 0; i < vals.Length; i++)
+                {
+                    Assert.IsTrue(vals[i] == Set.Enumerable.VirtualEnumerable.ElementAt(i), "3) vals[i] == Set.Enumerable.VirtualEnumerable.ElementAt(i)");
+                }
+            });
         }
     }
 }

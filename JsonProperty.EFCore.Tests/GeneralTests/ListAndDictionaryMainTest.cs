@@ -1,4 +1,6 @@
-﻿namespace JsonProperty.EFCore.Tests.GeneralTests
+﻿using JsonProperty.EFCore.Tests.Shared;
+
+namespace JsonProperty.EFCore.Tests.GeneralTests
 {
     internal class ListAndDictionaryMainTest
     {
@@ -63,13 +65,6 @@
                 Console.WriteLine($"listLast as Product:\r\n {prod}");
                 Console.WriteLine($"Last sublist product name:\r\n {prod.Name}\r\nLast sublist product params:\r\n {prod.Parameters.JsonString}\r\n");
             });
-        }
-
-        public class Product
-        {
-            public string? Name { get; set; }
-
-            public JsonDictionary Parameters { get; set; } = new();
         }
     }
 }
