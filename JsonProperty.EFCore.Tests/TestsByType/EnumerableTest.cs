@@ -1,6 +1,7 @@
-﻿using System.Text;
+﻿using JsonProperty.EFCore.Tests.TestsByType.Base;
+using System.Text;
 
-namespace JsonProperty.EFCore.Tests
+namespace JsonProperty.EFCore.Tests.TestsByType
 {
     internal class EnumerableTest : TestBase
     {
@@ -9,6 +10,8 @@ namespace JsonProperty.EFCore.Tests
         [Test]
         public void TestEnumerable()
         {
+            Console.WriteLine(nameof(TestEnumerable));
+
             Set.Enumerable.Add(vals[0]);
             Set.Enumerable.Edit(en => en.Append(vals[1]));
             Set.Enumerable.AddRange(new string[] { vals[2], vals[3] });

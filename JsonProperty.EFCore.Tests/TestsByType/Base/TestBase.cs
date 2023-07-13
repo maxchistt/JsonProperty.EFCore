@@ -1,4 +1,4 @@
-namespace JsonProperty.EFCore.Tests
+namespace JsonProperty.EFCore.Tests.TestsByType.Base
 {
     internal abstract class TestBase
     {

@@ -1,4 +1,4 @@
-﻿namespace JsonProperty.EFCore.Tests
+﻿namespace JsonProperty.EFCore.Tests.GeneralTests
 {
     internal class ListAndDictionaryMainTest
     {
@@ -9,6 +9,7 @@
         [Test]
         public void MainTest()
         {
+            Console.WriteLine(nameof(MainTest));
             Assert.DoesNotThrow(() =>
             {
                 //Create array of products
@@ -28,6 +29,9 @@
                     }
                 };
 
+                var lastProductParamsStr = products.Last().Parameters.JsonString;
+                Console.WriteLine($"\r\nCar product params json str:\r\n {lastProductParamsStr}\r\n");
+
                 //Create single product
                 var product = new Product() { Name = "Bag" };
                 product.Parameters.AddRange(new Dictionary<string, object>() {
@@ -41,8 +45,23 @@
                 list.Add(2.5);
                 list.Add(product);
                 list.AddRange(products);
-                var a = list.Deserialize();
-                Console.WriteLine(a);
+
+                var listDeserialisedCol = list.Deserialize();
+                Console.WriteLine($"List deserialized collection:\r\n {listDeserialisedCol}\r\n");
+
+                var jsonListString = list.JsonString;
+                Console.WriteLine($"List json sting:\r\n {jsonListString}\r\n");
+
+                var listLast = list.Deserialize().Last();
+                Console.WriteLine($"List last:\r\n {listLast}\r\nList last type:\r\n {listLast.GetType()}");
+                Console.WriteLine($"typeof(Product):\r\n {typeof(Product)}\r\n");
+
+                bool isTypeProdict = listLast is Product;
+                Console.WriteLine($"listLast is Product:\r\n {isTypeProdict}");
+
+                var prod = listLast as Product;
+                Console.WriteLine($"listLast as Product:\r\n {prod}");
+                Console.WriteLine($"Last sublist product name:\r\n {prod.Name}\r\nLast sublist product params:\r\n {prod.Parameters.JsonString}\r\n");
             });
         }
 
