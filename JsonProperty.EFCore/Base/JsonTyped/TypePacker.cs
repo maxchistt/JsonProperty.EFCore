@@ -7,17 +7,33 @@ namespace JsonProperty.EFCore.Base.JsonTyped
         public static object[] Pack(object value)
         {
             var valtype = new object[2];
-            valtype[0] = JsonConvert.DeserializeObject<object>(JsonConvert.SerializeObject(value));
+            valtype[0] = value;
             valtype[1] = value.GetType().FullName ?? value.GetType().Name;
             return valtype;
         }
 
         public static object? Unpack(object[] typedValueCollection)
         {
-            string TypeName = typedValueCollection[1].ToString();
+            string TypeName = typedValueCollection[1]?.ToString() ??
+                throw new ArgumentNullException("No string TypeName value");
             Type type = AssemblyTypeManager.ByName(TypeName);
-            object Val = (object)typedValueCollection[0];
-            return JsonConvert.DeserializeObject(JsonConvert.SerializeObject(Val), type);
+            object Val = typedValueCollection[0];
+
+            if (Val.GetType() == type)
+            {
+                return Val;
+            }
+            else
+            {
+                try
+                {
+                    return Convert.ChangeType(Val, type);
+                }
+                catch
+                {
+                    return JsonConvert.DeserializeObject(JsonConvert.SerializeObject(Val), type);
+                }
+            }
         }
     }
 }
