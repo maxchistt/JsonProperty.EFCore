@@ -1,4 +1,5 @@
 ﻿using System.Reflection;
+using JsonProperty.EFCore.Settings;
 
 namespace JsonProperty.EFCore.Base.Serializers.Base
 {
@@ -6,7 +7,7 @@ namespace JsonProperty.EFCore.Base.Serializers.Base
     {
         protected Func<string?> GetProp;
         protected Action<string> SetProp;
-        protected bool UseStrictSerialization { get; init; } = true;
+        protected bool UseStrictSerialization { get; init; } = JsonSettings.StrictTypeSerialization;
 
         public AbstractStringPropertySerializer(object parent) : this(parent, null)
         {
