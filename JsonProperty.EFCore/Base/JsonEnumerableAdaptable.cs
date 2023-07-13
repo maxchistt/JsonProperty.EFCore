@@ -34,7 +34,8 @@ namespace JsonProperty.EFCore.Base
 
         public void Edit(Func<IEnumerable<T_ListItem>, IEnumerable<T_ListItem>> EditingAction)
         {
-            IEnumerable<T_ListItem> res = EditingAction.Invoke(JsonSerializing.Deserialize());
+            var l = JsonSerializing.Deserialize();
+            IEnumerable<T_ListItem> res = EditingAction.Invoke(l);
             JsonSerializing.Serialize(res);
         }
 
