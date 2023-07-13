@@ -1,5 +1,5 @@
 ﻿using JsonProperty.EFCore.Base.Details;
-using JsonProperty.EFCore.Base.Details.Interfaces;
+using JsonProperty.EFCore.Base.Details.Interfaces.Serialize;
 using JsonProperty.EFCore.Base.Interfaces;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -8,7 +8,7 @@ namespace JsonProperty.EFCore.Base
     public abstract class JsonDictionaryAdaptable<TKey, TValue> : ISerializibleDictionary<TKey, TValue> where TKey : notnull
     {
         [NotMapped]
-        private IJsonDictionarySerialize<TKey, TValue> JsonSerializing { get; }
+        private IJsonDictionarySerializer<TKey, TValue> JsonSerializing { get; }
 
         [NotMapped]
         public IDictionary<TKey, TValue> VirtualDictionary { get => Deserialize(); set => Serialize(value); }

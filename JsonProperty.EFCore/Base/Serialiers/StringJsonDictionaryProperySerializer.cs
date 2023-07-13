@@ -1,11 +1,12 @@
-﻿using JsonProperty.EFCore.Base.Details.Interfaces;
-using JsonProperty.EFCore.Base.Details.JsonTyped;
+﻿using JsonProperty.EFCore.Base.Details.Base;
+using JsonProperty.EFCore.Base.Details.Interfaces.Serialize;
+using JsonProperty.EFCore.Base.JsonTyped;
 using System.Text.Json;
 
 namespace JsonProperty.EFCore.Base.Details
 {
     internal class StringJsonDictionaryPropertySerializer<TKey, TValue> :
-        AbstractStringJsonPropertySerializer, IJsonDictionarySerialize<TKey, TValue>
+        AbstractStringJsonPropertySerializer, IJsonDictionarySerializer<TKey, TValue>
         where TKey : notnull
     {
         public StringJsonDictionaryPropertySerializer(object parent, string? propName) : base(parent, propName)
@@ -20,11 +21,12 @@ namespace JsonProperty.EFCore.Base.Details
                 object[] valueType = TypePacker.Pack(item.Value);
                 dict.Add(item.Key, valueType);
             }
+            var serialized = JsonSerializer.Serialize(dict);
 
-            string res = JsonSerializer.Serialize(dict) ??
-                throw new NullReferenceException($"{nameof(IJsonDictionarySerialize<TKey, TValue>.Serialize)} set null fail");
+            string res = serialized ??
+                throw new NullReferenceException($"{nameof(IJsonDictionarySerializer<TKey, TValue>.Serialize)} set null fail");
             if (string.IsNullOrEmpty(res))
-                throw new ArgumentException($"Empty string to set in {nameof(IJsonDictionarySerialize<TKey, TValue>.Serialize)}");
+                throw new ArgumentException($"Empty string to set in {nameof(IJsonDictionarySerializer<TKey, TValue>.Serialize)}");
             SetProp(res);
         }
 
@@ -33,6 +35,8 @@ namespace JsonProperty.EFCore.Base.Details
             var prop = GetProp();
             if (!string.IsNullOrEmpty(prop))
             {
+                Dictionary<TKey, TValue>? resDict = null;
+
                 var res = JsonSerializer.Deserialize<IDictionary<TKey, object[]>>(prop);
                 if (res is not null)
                 {
@@ -43,9 +47,11 @@ namespace JsonProperty.EFCore.Base.Details
                         TValue val = (TValue)(obj ?? default!);
                         dict.Add(item.Key, val);
                     }
-
-                    return dict;
+                    resDict = dict;
                 }
+
+                if (resDict is not null)
+                    return resDict;
             }
             return new Dictionary<TKey, TValue>();
         }

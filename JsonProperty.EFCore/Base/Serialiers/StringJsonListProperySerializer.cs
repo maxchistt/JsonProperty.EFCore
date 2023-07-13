@@ -1,11 +1,12 @@
-﻿using JsonProperty.EFCore.Base.Details.Interfaces;
-using JsonProperty.EFCore.Base.Details.JsonTyped;
+﻿using JsonProperty.EFCore.Base.Details.Base;
+using JsonProperty.EFCore.Base.Details.Interfaces.Serialize;
+using JsonProperty.EFCore.Base.JsonTyped;
 using System.Text.Json;
 
 namespace JsonProperty.EFCore.Base.Details
 {
     internal class StringJsonListPropertySerializer<T> :
-        AbstractStringJsonPropertySerializer, IJsonListSerialize<T>
+        AbstractStringJsonPropertySerializer, IJsonListSerializer<T>
     {
         public StringJsonListPropertySerializer(object parent, string? propName) : base(parent, propName)
         {
@@ -16,6 +17,8 @@ namespace JsonProperty.EFCore.Base.Details
             var prop = GetProp();
             if (!string.IsNullOrWhiteSpace(prop))
             {
+                List<T>? resList = null;
+
                 var res = JsonSerializer.Deserialize<IList<object[]>>(prop);
                 if (res is not null)
                 {
@@ -26,27 +29,32 @@ namespace JsonProperty.EFCore.Base.Details
                         object? obj = TypePacker.Unpack(res.ElementAt(i));
                         arr[i] = (T)(obj ?? default!);
                     }
-                    return arr.ToList();
+                    resList = arr.ToList();
                 }
+
+                if (resList is not null)
+                    return resList;
             }
             return new T[0].ToList();
         }
 
         public void Serialize(IList<T> items)
         {
-            int count = items.Count();
+            string? resString = null;
 
+            int count = items.Count();
             List<object[]> list = new List<object[]>(count);
             for (int i = 0; i < count; i++)
             {
                 object[] valueType = TypePacker.Pack(items.ElementAt(i));
                 list.Insert(i, valueType);
             }
+            resString = JsonSerializer.Serialize(list);
 
-            string res = JsonSerializer.Serialize(list) ??
-                  throw new NullReferenceException($"{nameof(IJsonListSerialize<T>.Serialize)} set null fail");
+            string res = resString ??
+                  throw new NullReferenceException($"{nameof(IJsonListSerializer<T>.Serialize)} set null fail");
             if (string.IsNullOrEmpty(res))
-                throw new ArgumentException($"Empty string to set in {nameof(IJsonListSerialize<T>.Serialize)}");
+                throw new ArgumentException($"Empty string to set in {nameof(IJsonListSerializer<T>.Serialize)}");
             SetProp(res);
         }
     }

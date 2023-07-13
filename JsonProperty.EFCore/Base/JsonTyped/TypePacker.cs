@@ -1,6 +1,6 @@
 ﻿using System.Text.Json;
 
-namespace JsonProperty.EFCore.Base.Details.JsonTyped
+namespace JsonProperty.EFCore.Base.JsonTyped
 {
     internal static class TypePacker
     {
@@ -14,7 +14,7 @@ namespace JsonProperty.EFCore.Base.Details.JsonTyped
 
         public static object? Unpack(object[] typedValueCollection)
         {
-            string TypeName = (string)typedValueCollection[1].ToString();
+            string TypeName = typedValueCollection[1].ToString();
             Type type = AssemblyTypeManager.ByName(TypeName);
             JsonElement Val = (JsonElement)typedValueCollection[0];
             return Val.Deserialize(type);
