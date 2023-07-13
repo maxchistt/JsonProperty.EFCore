@@ -1,6 +1,6 @@
-﻿using JsonProperty.EFCore.Base.Details;
-using JsonProperty.EFCore.Base.Details.Interfaces;
-using JsonProperty.EFCore.Base.Interfaces;
+﻿using JsonProperty.EFCore.Base.Interfaces;
+using JsonProperty.EFCore.Base.Interfaces.Serializers;
+using JsonProperty.EFCore.Base.Serializers;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace JsonProperty.EFCore.Base
@@ -8,7 +8,7 @@ namespace JsonProperty.EFCore.Base
     public abstract class JsonEnumerableAdaptable<T_ListItem> : ISerializibleEnumerable<T_ListItem>
     {
         [NotMapped]
-        private IJsonEnumerableSerialize<T_ListItem> JsonSerializing { get; }
+        private IJsonEnumerableSerializer<T_ListItem> JsonSerializing { get; }
 
         [NotMapped]
         public IEnumerable<T_ListItem> VirtualEnumerable { get => Deserialize(); set => Serialize(value); }
@@ -34,7 +34,8 @@ namespace JsonProperty.EFCore.Base
 
         public void Edit(Func<IEnumerable<T_ListItem>, IEnumerable<T_ListItem>> EditingAction)
         {
-            IEnumerable<T_ListItem> res = EditingAction.Invoke(JsonSerializing.Deserialize());
+            var l = JsonSerializing.Deserialize();
+            IEnumerable<T_ListItem> res = EditingAction.Invoke(l);
             JsonSerializing.Serialize(res);
         }
 

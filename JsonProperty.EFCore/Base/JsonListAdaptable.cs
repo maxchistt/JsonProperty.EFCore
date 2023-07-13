@@ -1,6 +1,6 @@
-﻿using JsonProperty.EFCore.Base.Details;
-using JsonProperty.EFCore.Base.Details.Interfaces;
-using JsonProperty.EFCore.Base.Interfaces;
+﻿using JsonProperty.EFCore.Base.Interfaces;
+using JsonProperty.EFCore.Base.Interfaces.Serializers;
+using JsonProperty.EFCore.Base.Serializers;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace JsonProperty.EFCore.Base
@@ -8,7 +8,7 @@ namespace JsonProperty.EFCore.Base
     public abstract class JsonListAdaptable<T_ListItem> : ISerializibleList<T_ListItem>
     {
         [NotMapped]
-        private IJsonListSerialize<T_ListItem> JsonSerializing { get; }
+        private IJsonListSerializer<T_ListItem> JsonSerializing { get; }
 
         [NotMapped]
         public IList<T_ListItem> VirtualList { get => Deserialize(); set => Serialize(value); }
