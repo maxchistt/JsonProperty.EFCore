@@ -104,6 +104,17 @@ Here are few steps how to use JsonProperty.EFCore project:
    { "Camera": 13.5, "OS": "Android", "Screen": "1080x900", "Storage": 32 }
    ```
 
+   Or next if `JsonSettings.StrictTypeSerialization` is 'true' (default)
+
+   ```json
+   {
+     "Camera": [13.5, "System.Double"],
+     "OS": ["Android", "System.String"],
+     "Screen": ["1080x900", "System.String"],
+     "Storage": [32, "System.Int32"]
+   }
+   ```
+
    And here is example for `JsonEnumerable<T>`
 
    ```cs
@@ -115,4 +126,15 @@ Here are few steps how to use JsonProperty.EFCore project:
 
    ```
    [ ... , { "Text": "MyTodoItemTitle", "CompleteStatus": false }]
+   ```
+
+   Or
+
+   ```json
+   [
+     {
+       "Text": ["MyTodoItemTitle", "System.String"],
+       "CompleteStatus": [false, "System.Boolean"]
+     }
+   ]
    ```
