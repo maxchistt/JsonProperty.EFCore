@@ -2,16 +2,16 @@
 
 namespace JsonProperty.EFCore.Base.Serializers.Base
 {
-    internal abstract class AbstractStringJsonPropertySerializer
+    internal abstract class AbstractStringPropertySerializer
     {
         protected Func<string?> GetProp;
         protected Action<string> SetProp;
 
-        public AbstractStringJsonPropertySerializer(object parent) : this(parent, null)
+        public AbstractStringPropertySerializer(object parent) : this(parent, null)
         {
         }
 
-        public AbstractStringJsonPropertySerializer(object parent, string? propName)
+        public AbstractStringPropertySerializer(object parent, string? propName)
         {
             if (string.IsNullOrEmpty(propName))
             {

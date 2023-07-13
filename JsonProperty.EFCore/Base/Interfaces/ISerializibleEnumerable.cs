@@ -3,7 +3,7 @@ using JsonProperty.EFCore.Base.Interfaces.Serializers;
 
 namespace JsonProperty.EFCore.Base.Interfaces
 {
-    public interface ISerializibleEnumerable<T> : IJsonEnumerableSerializer<T>, IEditableEnumerable<T>
+    public interface ISerializibleEnumerable<T> : IEnumerableSerializer<T>, IEditableEnumerable<T>
     {
         public IEnumerable<T> VirtualEnumerable { get; set; }
     }

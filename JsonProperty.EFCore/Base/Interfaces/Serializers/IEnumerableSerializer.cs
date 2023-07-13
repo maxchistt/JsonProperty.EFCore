@@ -1,6 +1,6 @@
 ﻿namespace JsonProperty.EFCore.Base.Interfaces.Serializers
 {
-    public interface IJsonEnumerableSerializer<T>
+    public interface IEnumerableSerializer<T>
     {
         public IEnumerable<T> Deserialize();
 

@@ -1,15 +1,19 @@
-﻿using JsonProperty.EFCore.Base.Interfaces.Serializers;
+﻿using JsonProperty.EFCore.Base.Interfaces.JsonSerializers;
+using JsonProperty.EFCore.Base.Interfaces.Serializers;
 using JsonProperty.EFCore.Base.Serializers.Base;
 using JsonProperty.EFCore.Base.Serializers.CollectionSerializers;
 
 namespace JsonProperty.EFCore.Base.Serializers
 {
-    internal class StringJsonDictionaryPropertySerializer<TKey, TValue> :
-        AbstractStringJsonPropertySerializer, IJsonDictionarySerializer<TKey, TValue>
+    internal class JsonDictionaryStringPropertySerializer<TKey, TValue> :
+        AbstractStringPropertySerializer, IDictionarySerializer<TKey, TValue>
         where TKey : notnull
     {
-        public StringJsonDictionaryPropertySerializer(object parent, string? propName) : base(parent, propName)
+        private IJsonDictionarySerializer<TKey, TValue> JsonSerializer { get; set; }
+
+        public JsonDictionaryStringPropertySerializer(object parent, string? propName) : base(parent, propName)
         {
+            JsonSerializer = new JsonDictionarySerializer<TKey, TValue>();
         }
 
         public IDictionary<TKey, TValue> Deserialize()
@@ -17,7 +21,7 @@ namespace JsonProperty.EFCore.Base.Serializers
             var prop = GetProp();
             if (!string.IsNullOrEmpty(prop))
             {
-                var resDict = DictionarySerializer.DeserializeItems<TKey, TValue>(prop);
+                var resDict = JsonSerializer.Deserialize(prop);
 
                 if (resDict is not null)
                     return resDict;
@@ -27,7 +31,7 @@ namespace JsonProperty.EFCore.Base.Serializers
 
         public void Serialize(IDictionary<TKey, TValue> items)
         {
-            string res = DictionarySerializer.SerializeItems<TKey, TValue>(items) ??
+            string res = JsonSerializer.Serialize(items) ??
                 throw new NullReferenceException($"{nameof(Serialize)} set null fail");
             if (string.IsNullOrEmpty(res))
                 throw new ArgumentException($"Empty string to set in {nameof(Serialize)}");

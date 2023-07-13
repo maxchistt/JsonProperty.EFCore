@@ -8,14 +8,14 @@ namespace JsonProperty.EFCore.Base
     public abstract class JsonListAdaptable<T_ListItem> : ISerializibleList<T_ListItem>
     {
         [NotMapped]
-        private IJsonListSerializer<T_ListItem> JsonSerializing { get; }
+        private IListSerializer<T_ListItem> JsonSerializing { get; }
 
         [NotMapped]
         public IList<T_ListItem> VirtualList { get => Deserialize(); set => Serialize(value); }
 
         protected JsonListAdaptable(string? manualPropNameSet)
         {
-            JsonSerializing = new StringJsonArrayPropertySerializer<T_ListItem>(this, manualPropNameSet);
+            JsonSerializing = new JsonArrayStringPropertySerializer<T_ListItem>(this, manualPropNameSet);
         }
 
         protected JsonListAdaptable() : this(null)

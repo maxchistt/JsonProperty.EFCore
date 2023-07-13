@@ -1,11 +1,12 @@
-﻿using JsonProperty.EFCore.Base.Serializers.CollectionSerializers.TypedJson;
+﻿using JsonProperty.EFCore.Base.Interfaces.JsonSerializers;
+using JsonProperty.EFCore.Base.Serializers.CollectionSerializers.TypedJson;
 using Newtonsoft.Json;
 
 namespace JsonProperty.EFCore.Base.Serializers.CollectionSerializers
 {
-    internal static class ArraySerializer
+    internal class JsonArraySerializer<T> : IJsonArraySerializer<T>
     {
-        public static IList<T>? DeserializeItems<T>(string? json)
+        public IList<T>? Deserialize(string? json)
         {
             IList<T>? resList = null;
             var res = JsonConvert.DeserializeObject<IEnumerable<object[]>>(json);
@@ -23,7 +24,7 @@ namespace JsonProperty.EFCore.Base.Serializers.CollectionSerializers
             return resList;
         }
 
-        public static string SerializeItems<T>(IEnumerable<T> items)
+        public string Serialize(IEnumerable<T> items)
         {
             int count = items.Count();
             List<object[]> list = new List<object[]>(count);

@@ -8,14 +8,14 @@ namespace JsonProperty.EFCore.Base
     public abstract class JsonDictionaryAdaptable<TKey, TValue> : ISerializibleDictionary<TKey, TValue> where TKey : notnull
     {
         [NotMapped]
-        private IJsonDictionarySerializer<TKey, TValue> JsonSerializing { get; }
+        private IDictionarySerializer<TKey, TValue> JsonSerializing { get; }
 
         [NotMapped]
         public IDictionary<TKey, TValue> VirtualDictionary { get => Deserialize(); set => Serialize(value); }
 
         protected JsonDictionaryAdaptable(string? manualPropNameSet)
         {
-            JsonSerializing = new StringJsonDictionaryPropertySerializer<TKey, TValue>(this, manualPropNameSet);
+            JsonSerializing = new JsonDictionaryStringPropertySerializer<TKey, TValue>(this, manualPropNameSet);
         }
 
         protected JsonDictionaryAdaptable() : this(null)

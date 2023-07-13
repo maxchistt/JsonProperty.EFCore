@@ -1,11 +1,12 @@
-﻿using JsonProperty.EFCore.Base.Serializers.CollectionSerializers.TypedJson;
+﻿using JsonProperty.EFCore.Base.Interfaces.JsonSerializers;
+using JsonProperty.EFCore.Base.Serializers.CollectionSerializers.TypedJson;
 using Newtonsoft.Json;
 
 namespace JsonProperty.EFCore.Base.Serializers.CollectionSerializers
 {
-    internal static class DictionarySerializer
+    internal class JsonDictionarySerializer<TKey, TValue> : IJsonDictionarySerializer<TKey, TValue>
     {
-        public static string SerializeItems<TKey, TValue>(IDictionary<TKey, TValue> items)
+        public string Serialize(IDictionary<TKey, TValue> items)
         {
             Dictionary<TKey, object[]> dict = new();
             foreach (var item in items)
@@ -16,7 +17,7 @@ namespace JsonProperty.EFCore.Base.Serializers.CollectionSerializers
             return JsonConvert.SerializeObject(dict);
         }
 
-        public static IDictionary<TKey, TValue>? DeserializeItems<TKey, TValue>(string? prop)
+        public IDictionary<TKey, TValue>? Deserialize(string? prop)
         {
             IDictionary<TKey, TValue>? resDict = null;
             var res = JsonConvert.DeserializeObject<IDictionary<TKey, object[]>>(prop);
