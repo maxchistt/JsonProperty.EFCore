@@ -6,7 +6,6 @@
     <Nullable>enable</Nullable>
     <Title>JsonProperty.EFCore</Title>
     <PackageId>JsonProperty.EFCore</PackageId>
-    <Version>2.6.2</Version>
     <Description>This project allows you to use JSON fields in EF Core without setting up Fluent API</Description>
     <PackageTags>Json;EF;EFCore;Entity;Framework;Core;</PackageTags>
     <PackageProjectUrl>https://github.com/maxchistt/JsonProperty.EFCore</PackageProjectUrl>
