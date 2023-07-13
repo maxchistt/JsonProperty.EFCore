@@ -6,6 +6,7 @@ namespace JsonProperty.EFCore.Base.Serializers.Base
     {
         protected Func<string?> GetProp;
         protected Action<string> SetProp;
+        protected bool UseStrictSerialization { get; init; } = true;
 
         public AbstractStringPropertySerializer(object parent) : this(parent, null)
         {

@@ -1,10 +1,10 @@
 ﻿using JsonProperty.EFCore.Base.Interfaces.JsonSerializers;
-using JsonProperty.EFCore.Base.Serializers.CollectionSerializers.TypedJson;
+using JsonProperty.EFCore.Base.Serializers.CollectionSerializers.Strict.TypedJson;
 using Newtonsoft.Json;
 
-namespace JsonProperty.EFCore.Base.Serializers.CollectionSerializers
+namespace JsonProperty.EFCore.Base.Serializers.CollectionSerializers.Strict
 {
-    internal class JsonDictionarySerializer<TKey, TValue> : IJsonDictionarySerializer<TKey, TValue>
+    internal class JsonDictionaryStrictSerializer<TKey, TValue> : IJsonDictionarySerializer<TKey, TValue>
     {
         public string Serialize(IDictionary<TKey, TValue> items)
         {

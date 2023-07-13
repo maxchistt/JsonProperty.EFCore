@@ -1,7 +1,8 @@
 ﻿using JsonProperty.EFCore.Base.Interfaces.JsonSerializers;
 using JsonProperty.EFCore.Base.Interfaces.Serializers;
 using JsonProperty.EFCore.Base.Serializers.Base;
-using JsonProperty.EFCore.Base.Serializers.CollectionSerializers;
+using JsonProperty.EFCore.Base.Serializers.CollectionSerializers.Strict;
+using JsonProperty.EFCore.Base.Serializers.CollectionSerializers.Unstrict;
 
 namespace JsonProperty.EFCore.Base.Serializers
 {
@@ -13,7 +14,9 @@ namespace JsonProperty.EFCore.Base.Serializers
 
         public JsonDictionaryStringPropertySerializer(object parent, string? propName) : base(parent, propName)
         {
-            JsonSerializer = new JsonDictionarySerializer<TKey, TValue>();
+            JsonSerializer = UseStrictSerialization
+                ? new JsonDictionaryStrictSerializer<TKey, TValue>()
+                : new JsonDictionaryUnstrictSerializer<TKey, TValue>();
         }
 
         public IDictionary<TKey, TValue> Deserialize()
