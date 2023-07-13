@@ -37,7 +37,7 @@ jobs:
     - name: Pack nugets
       if: ${{ steps.regex-match.outputs.match != '' }}
       working-directory: ./JsonProperty.EFCore
-      run: dotnet pack -c Release -p:Version=${{ steps.regex-match.outputs.group1 }} -p:PackageVersion=${{ steps.digitVersion.outputs.value }} --no-build --output .
+      run: dotnet pack -c Release -p:Version=${{ steps.regex-match.outputs.match }} -p:PackageVersion=${{ steps.regex-match.outputs.match }} --no-build --output .
     - name: Push to NuGet
       if: ${{ steps.regex-match.outputs.match != '' }}
       working-directory: ./JsonProperty.EFCore
