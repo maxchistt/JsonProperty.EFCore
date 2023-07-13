@@ -1,5 +1,5 @@
-﻿using System.Reflection;
-using JsonProperty.EFCore.Settings;
+﻿using JsonProperty.EFCore.Settings;
+using System.Reflection;
 
 namespace JsonProperty.EFCore.Base.Serializers.Base
 {

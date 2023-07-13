@@ -22,13 +22,11 @@ namespace JsonProperty.EFCore.Tests.TestsByType
                     Assert.IsTrue(vals[i] == Set.Enumerable.Deserialize().ElementAt(i), "1) Assert.IsTrue(vals[i] == Set.Enumerable.Deserialize().ElementAt(i)");
                 }
 
-                //Assert.That(Set.Enumerable.JsonString == JsonSerializer.Serialize(vals), "2) Set.Enumerable.JsonString == JsonSerializer.Serialize(vals)");
-
                 Set.Enumerable.Serialize(vals);
 
                 for (int i = 0; i < vals.Length; i++)
                 {
-                    Assert.IsTrue(vals[i] == Set.Enumerable.VirtualEnumerable.ElementAt(i), "3) vals[i] == Set.Enumerable.VirtualEnumerable.ElementAt(i)");
+                    Assert.IsTrue(vals[i] == Set.Enumerable.VirtualEnumerable.ElementAt(i), "2) vals[i] == Set.Enumerable.VirtualEnumerable.ElementAt(i)");
                 }
             });
         }
