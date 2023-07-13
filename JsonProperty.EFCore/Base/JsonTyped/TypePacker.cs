@@ -1,4 +1,4 @@
-﻿using System.Text.Json;
+﻿using Newtonsoft.Json;
 
 namespace JsonProperty.EFCore.Base.JsonTyped
 {
@@ -7,7 +7,7 @@ namespace JsonProperty.EFCore.Base.JsonTyped
         public static object[] Pack(object value)
         {
             var valtype = new object[2];
-            valtype[0] = JsonSerializer.Deserialize<JsonElement>(JsonSerializer.Serialize(value));
+            valtype[0] = JsonConvert.DeserializeObject<object>(JsonConvert.SerializeObject(value));
             valtype[1] = value.GetType().FullName ?? value.GetType().Name;
             return valtype;
         }
@@ -16,8 +16,8 @@ namespace JsonProperty.EFCore.Base.JsonTyped
         {
             string TypeName = typedValueCollection[1].ToString();
             Type type = AssemblyTypeManager.ByName(TypeName);
-            JsonElement Val = (JsonElement)typedValueCollection[0];
-            return Val.Deserialize(type);
+            object Val = (object)typedValueCollection[0];
+            return JsonConvert.DeserializeObject(JsonConvert.SerializeObject(Val), type);
         }
     }
 }

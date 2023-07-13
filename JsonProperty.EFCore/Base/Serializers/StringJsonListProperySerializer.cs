@@ -1,7 +1,7 @@
 ﻿using JsonProperty.EFCore.Base.Interfaces.Serializers;
 using JsonProperty.EFCore.Base.JsonTyped;
 using JsonProperty.EFCore.Base.Serializers.Base;
-using System.Text.Json;
+using Newtonsoft.Json;
 
 namespace JsonProperty.EFCore.Base.Serializers
 {
@@ -19,7 +19,7 @@ namespace JsonProperty.EFCore.Base.Serializers
             {
                 List<T>? resList = null;
 
-                var res = JsonSerializer.Deserialize<IList<object[]>>(prop);
+                var res = JsonConvert.DeserializeObject<IList<object[]>>(prop);
                 if (res is not null)
                 {
                     int count = res.Count();
@@ -49,7 +49,7 @@ namespace JsonProperty.EFCore.Base.Serializers
                 object[] valueType = TypePacker.Pack(items.ElementAt(i));
                 list.Insert(i, valueType);
             }
-            resString = JsonSerializer.Serialize(list);
+            resString = JsonConvert.SerializeObject(list);
 
             string res = resString ??
                   throw new NullReferenceException($"{nameof(IJsonListSerializer<T>.Serialize)} set null fail");

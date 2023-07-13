@@ -1,7 +1,7 @@
 ﻿using JsonProperty.EFCore.Base.Interfaces.Serializers;
 using JsonProperty.EFCore.Base.JsonTyped;
 using JsonProperty.EFCore.Base.Serializers.Base;
-using System.Text.Json;
+using Newtonsoft.Json;
 
 namespace JsonProperty.EFCore.Base.Serializers
 {
@@ -21,7 +21,7 @@ namespace JsonProperty.EFCore.Base.Serializers
                 object[] valueType = TypePacker.Pack(item.Value);
                 dict.Add(item.Key, valueType);
             }
-            var serialized = JsonSerializer.Serialize(dict);
+            var serialized = JsonConvert.SerializeObject(dict);
 
             string res = serialized ??
                 throw new NullReferenceException($"{nameof(IJsonDictionarySerializer<TKey, TValue>.Serialize)} set null fail");
@@ -37,7 +37,7 @@ namespace JsonProperty.EFCore.Base.Serializers
             {
                 Dictionary<TKey, TValue>? resDict = null;
 
-                var res = JsonSerializer.Deserialize<IDictionary<TKey, object[]>>(prop);
+                var res = JsonConvert.DeserializeObject<IDictionary<TKey, object[]>>(prop);
                 if (res is not null)
                 {
                     Dictionary<TKey, TValue> dict = new();

@@ -5,7 +5,7 @@ namespace JsonProperty.EFCore.Tests.GeneralTests
 {
     internal class TypeConversionTest
     {
-        private const bool TestComplexTypeConversionStrictly = false;
+        private const bool TestComplexTypeConversionStrictly = true;
 
         public JsonEnumerable list { get; set; } = new();
 
