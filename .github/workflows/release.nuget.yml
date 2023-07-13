@@ -9,36 +9,8 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 5
     steps:
-    - id: lastVersion
-      name: lastVersion
-      uses: pozetroninc/github-action-get-latest-release@master
+    - name: Publish latest release to nuget
+      uses: maxchistt/action-publish-nuget@v1
       with:
-        repository: ${{ github.repository }}
-    - name: Checkout
-      uses: actions/checkout@v3
-      with:
-        ref: ${{ steps.lastVersion.outputs.release }}
-    - name: Setup .NET SDK
-      uses: actions/setup-dotnet@v3
-    - name: Build
-      working-directory: ./JsonProperty.EFCore
-      run: dotnet build -c Release
-    - name: Test
-      run: dotnet test -c Release
-    - uses: actions-ecosystem/action-regex-match@v2
-      id: regex-match
-      name: regex-match
-      with:
-        text: ${{ steps.lastVersion.outputs.release }}
-        regex: '\d+\.\d+\.\d+(\.\d+)?'
-    - name: Break if no version
-      if: ${{ steps.regex-match.outputs.match == '' }}
-      run: exit 1
-    - name: Pack nugets
-      if: ${{ steps.regex-match.outputs.match != '' }}
-      working-directory: ./JsonProperty.EFCore
-      run: dotnet pack -c Release -p:Version=${{ steps.regex-match.outputs.match }} -p:PackageVersion=${{ steps.regex-match.outputs.match }} --no-build --output .
-    - name: Push to NuGet
-      if: ${{ steps.regex-match.outputs.match != '' }}
-      working-directory: ./JsonProperty.EFCore
-      run: dotnet nuget push "*.nupkg" --api-key ${{secrets.NUGET_APIKEY}} --source https://api.nuget.org/v3/index.json
+        NUGET_APIKEY: ${{secrets.NUGET_APIKEY}}
+        working-directory: ./JsonProperty.EFCore
