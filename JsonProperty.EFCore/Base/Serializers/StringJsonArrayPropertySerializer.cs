@@ -4,14 +4,14 @@ using JsonProperty.EFCore.Base.Serializers.CollectionSerializers;
 
 namespace JsonProperty.EFCore.Base.Serializers
 {
-    internal class StringJsonEnumerablePropertySerializer<T> :
-        AbstractStringJsonPropertySerializer, IJsonEnumerableSerializer<T>
+    internal class StringJsonArrayPropertySerializer<T> :
+        AbstractStringJsonPropertySerializer, IJsonListSerializer<T>, IJsonEnumerableSerializer<T>
     {
-        public StringJsonEnumerablePropertySerializer(object parent, string? propName) : base(parent, propName)
+        public StringJsonArrayPropertySerializer(object parent, string? propName) : base(parent, propName)
         {
         }
 
-        public IEnumerable<T> Deserialize()
+        public IList<T> Deserialize()
         {
             var prop = GetProp();
             if (!string.IsNullOrWhiteSpace(prop))
@@ -22,6 +22,16 @@ namespace JsonProperty.EFCore.Base.Serializers
                     return resList;
             }
             return new T[0].ToList();
+        }
+
+        void IJsonListSerializer<T>.Serialize(IList<T> items)
+        {
+            Serialize(items);
+        }
+
+        IEnumerable<T> IJsonEnumerableSerializer<T>.Deserialize()
+        {
+            return Deserialize();
         }
 
         public void Serialize(IEnumerable<T> items)
