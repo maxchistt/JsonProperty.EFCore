@@ -1,4 +1,4 @@
-﻿namespace JsonProperty.EFCore.Base.Details.Interfaces.Serialize
+﻿namespace JsonProperty.EFCore.Base.Interfaces.Serializers
 {
     public interface IJsonListSerializer<T>
     {

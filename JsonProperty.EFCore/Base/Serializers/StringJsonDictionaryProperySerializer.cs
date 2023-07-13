@@ -1,9 +1,9 @@
-﻿using JsonProperty.EFCore.Base.Details.Base;
-using JsonProperty.EFCore.Base.Details.Interfaces.Serialize;
+﻿using JsonProperty.EFCore.Base.Interfaces.Serializers;
 using JsonProperty.EFCore.Base.JsonTyped;
+using JsonProperty.EFCore.Base.Serializers.Base;
 using System.Text.Json;
 
-namespace JsonProperty.EFCore.Base.Details
+namespace JsonProperty.EFCore.Base.Serializers
 {
     internal class StringJsonDictionaryPropertySerializer<TKey, TValue> :
         AbstractStringJsonPropertySerializer, IJsonDictionarySerializer<TKey, TValue>

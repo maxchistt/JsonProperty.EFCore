@@ -1,6 +1,6 @@
-﻿using JsonProperty.EFCore.Base.Details;
-using JsonProperty.EFCore.Base.Details.Interfaces.Serialize;
-using JsonProperty.EFCore.Base.Interfaces;
+﻿using JsonProperty.EFCore.Base.Interfaces;
+using JsonProperty.EFCore.Base.Interfaces.Serializers;
+using JsonProperty.EFCore.Base.Serializers;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace JsonProperty.EFCore.Base
