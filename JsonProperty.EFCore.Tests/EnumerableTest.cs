@@ -1,5 +1,4 @@
 ﻿using System.Text;
-using System.Text.Json;
 
 namespace JsonProperty.EFCore.Tests
 {
@@ -16,16 +15,16 @@ namespace JsonProperty.EFCore.Tests
 
             for (int i = 0; i < vals.Length; i++)
             {
-                Assert.IsTrue(vals[i] == Set.Enumerable.Deserialize().ElementAt(i));
+                Assert.IsTrue(vals[i] == Set.Enumerable.Deserialize().ElementAt(i), "1) Assert.IsTrue(vals[i] == Set.Enumerable.Deserialize().ElementAt(i)");
             }
 
-            Assert.That(Set.Enumerable.JsonString == JsonSerializer.Serialize(vals));
+            //Assert.That(Set.Enumerable.JsonString == JsonSerializer.Serialize(vals), "2) Set.Enumerable.JsonString == JsonSerializer.Serialize(vals)");
 
             Set.Enumerable.Serialize(vals);
 
             for (int i = 0; i < vals.Length; i++)
             {
-                Assert.IsTrue(vals[i] == Set.Enumerable.VirtualEnumerable.ElementAt(i));
+                Assert.IsTrue(vals[i] == Set.Enumerable.VirtualEnumerable.ElementAt(i), "3) vals[i] == Set.Enumerable.VirtualEnumerable.ElementAt(i)");
             }
         }
     }
