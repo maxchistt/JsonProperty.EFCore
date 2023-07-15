@@ -121,5 +121,40 @@ namespace JsonProperty.EFCore.Tests.GeneralTests
                 }
             });
         }
+
+        [Test, Order(4)]
+        public void SubitemComplexTypeConversionTestV4()
+        {
+            Console.WriteLine(nameof(SubitemComplexTypeConversionTestV4));
+            Assert.DoesNotThrow(() =>
+            {
+                var prod_listLast = list.Deserialize().Last() as Product;
+                object Test1Res_firstParamValue = prod_listLast.Parameters.Deserialize().First().Value;
+
+                if (Test1Res_firstParamValue.GetType() == typeof(object))
+                    Assert.Fail($"{nameof(Test1Res_firstParamValue)} is object");
+
+                if (Test1Res_firstParamValue is JsonElement jsonElement)
+                {
+                    Assert.That(jsonElement.ValueKind, Is.EqualTo(JsonValueKind.Number), "JsonElement is number fail");
+                }
+                Assert.That(Test1Res_firstParamValue, Is.Not.TypeOf<string>(), "Is.Not.TypeOf<string>() fail");
+                Assert.That(Test1Res_firstParamValue.GetType(), Is.AnyOf(typeof(float), typeof(double), typeof(decimal)), "type is any of numeric fail");
+                Assert.That(Test1Res_firstParamValue, Is.Not.NaN, "Is.Not.NaN fail");
+                Assert.IsTrue(decimal.TryParse(Test1Res_firstParamValue?.ToString(), out decimal _), "not parsable to decimal");
+
+                if (TestComplexTypeConversionStrictly)
+                {
+                    Assert.IsAssignableFrom<decimal>(Test1Res_firstParamValue, "IsAssignableFrom<decimal> failed");
+                    Assert.That(Test1Res_firstParamValue, Is.AssignableTo<decimal>(), "Is.AssignableTo<decimal>() failed");
+
+                    Assert.That(Test1Res_firstParamValue, Is.InstanceOf(typeof(decimal)), "lastParamValue is decimal test failed");
+                }
+                else
+                {
+                    Console.WriteLine($"!!! {nameof(SubitemComplexTypeConversionTestV4)} test is disabled by {nameof(TestComplexTypeConversionStrictly)} = {TestComplexTypeConversionStrictly} const");
+                }
+            });
+        }
     }
 }

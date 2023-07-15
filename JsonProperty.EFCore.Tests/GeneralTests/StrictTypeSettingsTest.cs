@@ -37,13 +37,13 @@ namespace JsonProperty.EFCore.Tests.GeneralTests
             {
                 Settings.JsonSettings.StrictTypeSerialization = false;
                 Enumerable = new JsonEnumerable<string>();
-                Enumerable.AddRange(TestValues.Strings);
-                Assert.That(Enumerable.JsonString == JsonConvert.SerializeObject(TestValues.Strings));
+                Enumerable.AddRange(TestValues.StringsList);
+                Assert.That(Enumerable.JsonString == JsonConvert.SerializeObject(TestValues.StringsList));
 
                 Settings.JsonSettings.StrictTypeSerialization = true;
                 Enumerable = new JsonEnumerable<string>();
-                Enumerable.AddRange(TestValues.Strings);
-                Assert.That(Enumerable.JsonString != JsonConvert.SerializeObject(TestValues.Strings));
+                Enumerable.AddRange(TestValues.StringsList);
+                Assert.That(Enumerable.JsonString != JsonConvert.SerializeObject(TestValues.StringsList));
 
                 Settings.JsonSettings.StrictTypeSerialization = true;
                 Settings.JsonSettings.AllowChangeStrictParamAfterItUsed = false;
