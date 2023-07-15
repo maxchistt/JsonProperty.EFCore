@@ -1,10 +1,10 @@
-﻿using Newtonsoft.Json;
+﻿using JsonProperty.EFCore.Tests.Shared;
+using Newtonsoft.Json;
 
 namespace JsonProperty.EFCore.Tests.GeneralTests
 {
     internal class StrictTypeSettingsTest
     {
-        private string[] vals = { "Item1", "Item2", "Item3", "Item4" };
         private JsonEnumerable<string>? Enumerable { get; set; }
 
         [SetUp]
@@ -37,13 +37,13 @@ namespace JsonProperty.EFCore.Tests.GeneralTests
             {
                 Settings.JsonSettings.StrictTypeSerialization = false;
                 Enumerable = new JsonEnumerable<string>();
-                Enumerable.AddRange(vals);
-                Assert.That(Enumerable.JsonString == JsonConvert.SerializeObject(vals));
+                Enumerable.AddRange(TestValues.Strings);
+                Assert.That(Enumerable.JsonString == JsonConvert.SerializeObject(TestValues.Strings));
 
                 Settings.JsonSettings.StrictTypeSerialization = true;
                 Enumerable = new JsonEnumerable<string>();
-                Enumerable.AddRange(vals);
-                Assert.That(Enumerable.JsonString != JsonConvert.SerializeObject(vals));
+                Enumerable.AddRange(TestValues.Strings);
+                Assert.That(Enumerable.JsonString != JsonConvert.SerializeObject(TestValues.Strings));
 
                 Settings.JsonSettings.StrictTypeSerialization = true;
                 Settings.JsonSettings.AllowChangeStrictParamAfterItUsed = false;

@@ -1,11 +1,17 @@
-﻿using JsonProperty.EFCore.Tests.TestsByType.Base;
+﻿using JsonProperty.EFCore.Tests.Shared;
 using System.Text;
 
 namespace JsonProperty.EFCore.Tests.TestsByType
 {
-    internal class EnumerableTest : TestBase
+    internal class EnumerableTest
     {
-        private string[] vals = { "Item1", "Item2", "Item3", "Item4" };
+        public JsonEnumerable<string> Enumerable { get; set; }
+
+        [SetUp]
+        public void Setup()
+        {
+            Enumerable = new();
+        }
 
         [Test]
         public void TestEnumerable()
@@ -13,20 +19,20 @@ namespace JsonProperty.EFCore.Tests.TestsByType
             Console.WriteLine(nameof(TestEnumerable));
             Assert.DoesNotThrow(() =>
             {
-                Set.Enumerable.Add(vals[0]);
-                Set.Enumerable.Edit(en => en.Append(vals[1]));
-                Set.Enumerable.AddRange(new string[] { vals[2], vals[3] });
+                Enumerable.Add(TestValues.Strings[0]);
+                Enumerable.Edit(en => en.Append(TestValues.Strings[1]));
+                Enumerable.AddRange(new string[] { TestValues.Strings[2], TestValues.Strings[3] });
 
-                for (int i = 0; i < vals.Length; i++)
+                for (int i = 0; i < TestValues.Strings.Count; i++)
                 {
-                    Assert.IsTrue(vals[i] == Set.Enumerable.Deserialize().ElementAt(i), "1) Assert.IsTrue(vals[i] == Set.Enumerable.Deserialize().ElementAt(i)");
+                    Assert.IsTrue(TestValues.Strings[i] == Enumerable.Deserialize().ElementAt(i), "1) Assert.IsTrue(TestValues.Strings[i] == Enumerable.Deserialize().ElementAt(i)");
                 }
 
-                Set.Enumerable.Serialize(vals);
+                Enumerable.Serialize(TestValues.Strings);
 
-                for (int i = 0; i < vals.Length; i++)
+                for (int i = 0; i < TestValues.Strings.Count; i++)
                 {
-                    Assert.IsTrue(vals[i] == Set.Enumerable.VirtualEnumerable.ElementAt(i), "2) vals[i] == Set.Enumerable.VirtualEnumerable.ElementAt(i)");
+                    Assert.IsTrue(TestValues.Strings[i] == Enumerable.VirtualEnumerable.ElementAt(i), "2) TestValues.Strings[i] == Enumerable.VirtualEnumerable.ElementAt(i)");
                 }
             });
         }
