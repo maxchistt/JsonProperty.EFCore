@@ -1,6 +1,6 @@
-﻿namespace JsonProperty.EFCore.Base.Interfaces.Serializers
+﻿namespace JsonProperty.EFCore.Base.Interfaces.Serializible
 {
-    public interface IDictionarySerializer<TKey, TValue>
+    public interface ISerializibleDictionary<TKey, TValue>
     {
         public IDictionary<TKey, TValue> Deserialize();
 

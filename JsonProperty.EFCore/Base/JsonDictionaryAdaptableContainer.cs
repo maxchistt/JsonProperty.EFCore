@@ -1,24 +1,24 @@
 ﻿using JsonProperty.EFCore.Base.Interfaces;
-using JsonProperty.EFCore.Base.Interfaces.Serializers;
+using JsonProperty.EFCore.Base.Interfaces.Serializible;
 using JsonProperty.EFCore.Base.Serializers;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace JsonProperty.EFCore.Base
 {
-    public abstract class JsonDictionaryAdaptable<TKey, TValue> : ISerializibleDictionary<TKey, TValue> where TKey : notnull
+    public abstract class JsonDictionaryAdaptableContainer<TKey, TValue> : ISerializibleDictionaryContainer<TKey, TValue> where TKey : notnull
     {
         [NotMapped]
-        private IDictionarySerializer<TKey, TValue> JsonSerializing { get; }
+        private ISerializibleDictionary<TKey, TValue> JsonSerializing { get; }
 
         [NotMapped]
         public IDictionary<TKey, TValue> VirtualDictionary { get => Deserialize(); set => Serialize(value); }
 
-        protected JsonDictionaryAdaptable(string? manualPropNameSet)
+        protected JsonDictionaryAdaptableContainer(string? manualPropNameSet)
         {
             JsonSerializing = new JsonDictionaryStringPropertySerializer<TKey, TValue>(this, manualPropNameSet);
         }
 
-        protected JsonDictionaryAdaptable() : this(null)
+        protected JsonDictionaryAdaptableContainer() : this(null)
         {
         }
 

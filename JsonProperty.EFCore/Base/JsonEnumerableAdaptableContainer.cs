@@ -1,24 +1,24 @@
 ﻿using JsonProperty.EFCore.Base.Interfaces;
-using JsonProperty.EFCore.Base.Interfaces.Serializers;
+using JsonProperty.EFCore.Base.Interfaces.Serializible;
 using JsonProperty.EFCore.Base.Serializers;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace JsonProperty.EFCore.Base
 {
-    public abstract class JsonEnumerableAdaptable<T_ListItem> : ISerializibleEnumerable<T_ListItem>
+    public abstract class JsonEnumerableAdaptableContainer<T_ListItem> : ISerializibleEnumerableContainer<T_ListItem>
     {
         [NotMapped]
-        private IEnumerableSerializer<T_ListItem> JsonSerializing { get; }
+        private ISerializibleEnumerable<T_ListItem> JsonSerializing { get; }
 
         [NotMapped]
         public IEnumerable<T_ListItem> VirtualEnumerable { get => Deserialize(); set => Serialize(value); }
 
-        protected JsonEnumerableAdaptable(string? manualPropNameSet)
+        protected JsonEnumerableAdaptableContainer(string? manualPropNameSet)
         {
             JsonSerializing = new JsonArrayStringPropertySerializer<T_ListItem>(this, manualPropNameSet);
         }
 
-        protected JsonEnumerableAdaptable() : this(null)
+        protected JsonEnumerableAdaptableContainer() : this(null)
         {
         }
 

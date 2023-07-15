@@ -1,7 +1,7 @@
 ﻿using JsonProperty.EFCore.Base.Interfaces.JsonSerializers;
 using Newtonsoft.Json;
 
-namespace JsonProperty.EFCore.Base.Serializers.CollectionSerializers.Unstrict
+namespace JsonProperty.EFCore.Base.Serializers.JsonSerializers.Unstrict
 {
     internal class JsonArrayUnstrictSerializer<T> : IJsonArraySerializer<T>
     {

@@ -1,6 +1,6 @@
 ﻿using Newtonsoft.Json;
 
-namespace JsonProperty.EFCore.Base.Serializers.CollectionSerializers.Strict.TypedJson
+namespace JsonProperty.EFCore.Base.Serializers.JsonSerializers.Strict.TypedJson
 {
     internal static class TypePacker
     {

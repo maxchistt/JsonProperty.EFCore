@@ -5,7 +5,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace JsonProperty.EFCore
 {
     [Owned]
-    public class JsonList<T> : JsonListAdaptable<T>
+    public class JsonList<T> : JsonListAdaptableContainer<T>
     {
         [Column]
         public string? JsonString { get; set; }

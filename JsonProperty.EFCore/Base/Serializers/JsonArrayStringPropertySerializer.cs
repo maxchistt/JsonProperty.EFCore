@@ -1,13 +1,13 @@
 ﻿using JsonProperty.EFCore.Base.Interfaces.JsonSerializers;
-using JsonProperty.EFCore.Base.Interfaces.Serializers;
+using JsonProperty.EFCore.Base.Interfaces.Serializible;
 using JsonProperty.EFCore.Base.Serializers.Base;
-using JsonProperty.EFCore.Base.Serializers.CollectionSerializers.Strict;
-using JsonProperty.EFCore.Base.Serializers.CollectionSerializers.Unstrict;
+using JsonProperty.EFCore.Base.Serializers.JsonSerializers.Strict;
+using JsonProperty.EFCore.Base.Serializers.JsonSerializers.Unstrict;
 
 namespace JsonProperty.EFCore.Base.Serializers
 {
     internal class JsonArrayStringPropertySerializer<T> :
-        AbstractStringPropertySerializer, IArraySerializer<T>
+        AbstractStringPropertySerializer, ISerializibleArray<T>
     {
         private IJsonArraySerializer<T> JsonSerializer { get; set; }
 
@@ -31,12 +31,12 @@ namespace JsonProperty.EFCore.Base.Serializers
             return new T[0].ToList();
         }
 
-        void IListSerializer<T>.Serialize(IList<T> items)
+        void ISerializibleList<T>.Serialize(IList<T> items)
         {
             Serialize(items);
         }
 
-        IEnumerable<T> IEnumerableSerializer<T>.Deserialize()
+        IEnumerable<T> ISerializibleEnumerable<T>.Deserialize()
         {
             return Deserialize();
         }

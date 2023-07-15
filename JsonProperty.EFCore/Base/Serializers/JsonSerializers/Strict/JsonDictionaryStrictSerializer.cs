@@ -1,8 +1,8 @@
 ﻿using JsonProperty.EFCore.Base.Interfaces.JsonSerializers;
-using JsonProperty.EFCore.Base.Serializers.CollectionSerializers.Strict.TypedJson;
+using JsonProperty.EFCore.Base.Serializers.JsonSerializers.Strict.TypedJson;
 using Newtonsoft.Json;
 
-namespace JsonProperty.EFCore.Base.Serializers.CollectionSerializers.Strict
+namespace JsonProperty.EFCore.Base.Serializers.JsonSerializers.Strict
 {
     internal class JsonDictionaryStrictSerializer<TKey, TValue> : IJsonDictionarySerializer<TKey, TValue>
     {

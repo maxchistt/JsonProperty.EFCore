@@ -1,13 +1,13 @@
 ﻿using JsonProperty.EFCore.Base.Interfaces.JsonSerializers;
-using JsonProperty.EFCore.Base.Interfaces.Serializers;
+using JsonProperty.EFCore.Base.Interfaces.Serializible;
 using JsonProperty.EFCore.Base.Serializers.Base;
-using JsonProperty.EFCore.Base.Serializers.CollectionSerializers.Strict;
-using JsonProperty.EFCore.Base.Serializers.CollectionSerializers.Unstrict;
+using JsonProperty.EFCore.Base.Serializers.JsonSerializers.Strict;
+using JsonProperty.EFCore.Base.Serializers.JsonSerializers.Unstrict;
 
 namespace JsonProperty.EFCore.Base.Serializers
 {
     internal class JsonDictionaryStringPropertySerializer<TKey, TValue> :
-        AbstractStringPropertySerializer, IDictionarySerializer<TKey, TValue>
+        AbstractStringPropertySerializer, ISerializibleDictionary<TKey, TValue>
         where TKey : notnull
     {
         private IJsonDictionarySerializer<TKey, TValue> JsonSerializer { get; set; }

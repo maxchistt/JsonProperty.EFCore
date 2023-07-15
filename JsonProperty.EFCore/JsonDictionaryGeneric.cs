@@ -5,7 +5,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace JsonProperty.EFCore
 {
     [Owned]
-    public class JsonDictionary<TKey, TValue> : JsonDictionaryAdaptable<TKey, TValue> where TKey : notnull
+    public class JsonDictionary<TKey, TValue> : JsonDictionaryAdaptableContainer<TKey, TValue> where TKey : notnull
     {
         [Column]
         public string? JsonString { get; set; }
