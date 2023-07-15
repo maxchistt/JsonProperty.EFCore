@@ -138,3 +138,9 @@ Here are few steps how to use JsonProperty.EFCore project:
      }
    ]
    ```
+
+You can see more at [wiki](https://github.com/maxchistt/JsonProperty.EFCore/wiki)
+
+## Show your support
+
+⭐️ this [repository](https://github.com/maxchistt/JsonProperty.EFCore) if this package helped you!
