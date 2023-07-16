@@ -1,4 +1,4 @@
-﻿namespace JsonProperty.EFCore.Base.Serializers.JsonSerializers.Strict.TypedJson
+﻿namespace JsonProperty.EFCore.Base.Serializing.JsonSerializers.Strict.TypedJson
 {
     internal static class AssemblyTypeManager
     {

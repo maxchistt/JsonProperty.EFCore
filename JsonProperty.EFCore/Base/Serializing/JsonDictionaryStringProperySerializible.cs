@@ -1,27 +1,28 @@
 ﻿using JsonProperty.EFCore.Base.Interfaces.JsonSerializers;
+using JsonProperty.EFCore.Base.Interfaces.PropertyProxy;
 using JsonProperty.EFCore.Base.Interfaces.Serializible;
-using JsonProperty.EFCore.Base.Serializers.Base;
-using JsonProperty.EFCore.Base.Serializers.JsonSerializers.Strict;
-using JsonProperty.EFCore.Base.Serializers.JsonSerializers.Unstrict;
+using JsonProperty.EFCore.Base.Serializing.JsonSerializers.Strict;
+using JsonProperty.EFCore.Base.Serializing.JsonSerializers.Unstrict;
+using JsonProperty.EFCore.Base.Serializing.PropertyProxy;
 
-namespace JsonProperty.EFCore.Base.Serializers
+namespace JsonProperty.EFCore.Base.Serializing
 {
-    internal class JsonDictionaryStringPropertySerializible<TKey, TValue> :
-        AbstractStringPropertySerializer, ISerializibleDictionary<TKey, TValue>
-        where TKey : notnull
+    internal class JsonDictionaryStringPropertySerializible<TKey, TValue> : ISerializibleDictionary<TKey, TValue> where TKey : notnull
     {
+        private IStringPropertyProxy StringProp { get; set; }
         private IJsonDictionarySerializer<TKey, TValue> JsonSerializer { get; set; }
 
-        public JsonDictionaryStringPropertySerializible(object parent, string? propName) : base(parent, propName)
+        public JsonDictionaryStringPropertySerializible(object parent, string? propName)
         {
-            JsonSerializer = UseStrictSerialization
+            StringProp = new StringPropertyProxy(parent, propName);
+            JsonSerializer = Settings.JsonSettings.StrictTypeSerialization
                 ? new JsonDictionaryStrictSerializer<TKey, TValue>()
                 : new JsonDictionaryUnstrictSerializer<TKey, TValue>();
         }
 
         public IDictionary<TKey, TValue> Deserialize()
         {
-            var prop = GetProp();
+            var prop = StringProp.Get();
             if (!string.IsNullOrEmpty(prop))
             {
                 var resDict = JsonSerializer.Deserialize(prop);
@@ -38,7 +39,7 @@ namespace JsonProperty.EFCore.Base.Serializers
                 throw new NullReferenceException($"{nameof(Serialize)} set null fail");
             if (string.IsNullOrEmpty(res))
                 throw new ArgumentException($"Empty string to set in {nameof(Serialize)}");
-            SetProp(res);
+            StringProp.Set(res);
         }
     }
 }
