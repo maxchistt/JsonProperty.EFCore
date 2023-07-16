@@ -1,7 +1,7 @@
 ﻿using JsonProperty.EFCore.Base.Interfaces.JsonSerializers;
 using Newtonsoft.Json;
 
-namespace JsonProperty.EFCore.Base.Serializers.JsonSerializers.Unstrict
+namespace JsonProperty.EFCore.Base.Serializing.JsonSerializers.Unstrict
 {
     internal class JsonDictionaryUnstrictSerializer<TKey, TValue> : IJsonDictionarySerializer<TKey, TValue> where TKey : notnull
     {

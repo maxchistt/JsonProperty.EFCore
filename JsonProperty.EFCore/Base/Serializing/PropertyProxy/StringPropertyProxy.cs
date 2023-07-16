@@ -1,19 +1,18 @@
-﻿using JsonProperty.EFCore.Settings;
+﻿using JsonProperty.EFCore.Base.Interfaces.PropertyProxy;
 using System.Reflection;
 
-namespace JsonProperty.EFCore.Base.Serializers.Base
+namespace JsonProperty.EFCore.Base.Serializing.PropertyProxy
 {
-    internal abstract class AbstractStringPropertySerializer
+    internal sealed class StringPropertyProxy : IStringPropertyProxy
     {
-        protected Func<string?> GetProp;
-        protected Action<string> SetProp;
-        protected bool UseStrictSerialization { get; init; } = JsonSettings.StrictTypeSerialization;
+        private readonly Func<string?> GetProp;
+        private readonly Action<string> SetProp;
 
-        public AbstractStringPropertySerializer(object parent) : this(parent, null)
+        public StringPropertyProxy(object parent) : this(parent, null)
         {
         }
 
-        public AbstractStringPropertySerializer(object parent, string? propName)
+        public StringPropertyProxy(object parent, string? propName)
         {
             if (string.IsNullOrEmpty(propName))
             {
@@ -33,6 +32,16 @@ namespace JsonProperty.EFCore.Base.Serializers.Base
             {
                 propInf.SetValue(parent, str);
             };
+        }
+
+        public string? Get()
+        {
+            return GetProp.Invoke();
+        }
+
+        public void Set(string value)
+        {
+            SetProp.Invoke(value);
         }
     }
 }

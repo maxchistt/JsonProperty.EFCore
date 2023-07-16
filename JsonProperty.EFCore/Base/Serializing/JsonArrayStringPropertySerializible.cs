@@ -1,26 +1,28 @@
 ﻿using JsonProperty.EFCore.Base.Interfaces.JsonSerializers;
+using JsonProperty.EFCore.Base.Interfaces.PropertyProxy;
 using JsonProperty.EFCore.Base.Interfaces.Serializible;
-using JsonProperty.EFCore.Base.Serializers.Base;
-using JsonProperty.EFCore.Base.Serializers.JsonSerializers.Strict;
-using JsonProperty.EFCore.Base.Serializers.JsonSerializers.Unstrict;
+using JsonProperty.EFCore.Base.Serializing.JsonSerializers.Strict;
+using JsonProperty.EFCore.Base.Serializing.JsonSerializers.Unstrict;
+using JsonProperty.EFCore.Base.Serializing.PropertyProxy;
 
-namespace JsonProperty.EFCore.Base.Serializers
+namespace JsonProperty.EFCore.Base.Serializing
 {
-    internal class JsonArrayStringPropertySerializible<T> :
-        AbstractStringPropertySerializer, ISerializibleArray<T>
+    internal class JsonArrayStringPropertySerializible<T> : ISerializibleArray<T>
     {
+        private IStringPropertyProxy StringProp { get; set; }
         private IJsonArraySerializer<T> JsonSerializer { get; set; }
 
-        public JsonArrayStringPropertySerializible(object parent, string? propName) : base(parent, propName)
+        public JsonArrayStringPropertySerializible(object parent, string? propName)
         {
-            JsonSerializer = UseStrictSerialization
+            StringProp = new StringPropertyProxy(parent, propName);
+            JsonSerializer = Settings.JsonSettings.StrictTypeSerialization
                 ? new JsonArrayStrictSerializer<T>()
                 : new JsonArrayUnstrictSerializer<T>();
         }
 
         public IList<T> Deserialize()
         {
-            var prop = GetProp();
+            var prop = StringProp.Get();
             if (!string.IsNullOrWhiteSpace(prop))
             {
                 var resList = JsonSerializer.Deserialize(prop);
@@ -47,7 +49,7 @@ namespace JsonProperty.EFCore.Base.Serializers
                   throw new NullReferenceException($"{nameof(Serialize)} set null fail");
             if (string.IsNullOrEmpty(res))
                 throw new ArgumentException($"Empty string to set in {nameof(Serialize)}");
-            SetProp(res);
+            StringProp.Set(res);
         }
     }
 }
