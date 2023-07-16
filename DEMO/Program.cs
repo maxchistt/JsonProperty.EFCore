@@ -44,7 +44,7 @@ void FillData()
         product.Price = 399.99m;
         product.Amount = 7;
         product.Parameters.AddRange(new Dictionary<string, object>() {
-            { "Voliune", 5 }, { "Color", "Red" }
+            { "Volume", 5 }, { "Color", "Red" }
         });
         product.Parameters.Add("Matherial", "Leather");
 
