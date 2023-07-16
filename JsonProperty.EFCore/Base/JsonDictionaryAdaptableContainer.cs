@@ -1,16 +1,16 @@
 ﻿using JsonProperty.EFCore.Base.Interfaces;
 using JsonProperty.EFCore.Base.Interfaces.Serializible;
 using JsonProperty.EFCore.Base.Serializing;
+using Newtonsoft.Json;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace JsonProperty.EFCore.Base
 {
     public abstract class JsonDictionaryAdaptableContainer<TKey, TValue> : ISerializibleDictionaryContainer<TKey, TValue> where TKey : notnull
     {
-        [NotMapped]
         private ISerializibleDictionary<TKey, TValue> JsonSerializing { get; }
 
-        [NotMapped]
+        [NotMapped, JsonIgnore]
         public IDictionary<TKey, TValue> VirtualDictionary { get => Deserialize(); set => Serialize(value); }
 
         protected JsonDictionaryAdaptableContainer(string? manualPropNameSet)

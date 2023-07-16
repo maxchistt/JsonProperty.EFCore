@@ -2,15 +2,15 @@
 using JsonProperty.EFCore.Base.Interfaces.Serializible;
 using JsonProperty.EFCore.Base.Serializing;
 using System.ComponentModel.DataAnnotations.Schema;
+using Newtonsoft.Json;
 
 namespace JsonProperty.EFCore.Base
 {
     public abstract class JsonEnumerableAdaptableContainer<T_ListItem> : ISerializibleEnumerableContainer<T_ListItem>
     {
-        [NotMapped]
         private ISerializibleEnumerable<T_ListItem> JsonSerializing { get; }
 
-        [NotMapped]
+        [NotMapped, JsonIgnore]
         public IEnumerable<T_ListItem> VirtualEnumerable { get => Deserialize(); set => Serialize(value); }
 
         protected JsonEnumerableAdaptableContainer(string? manualPropNameSet)
