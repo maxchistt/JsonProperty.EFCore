@@ -9,7 +9,7 @@ namespace JsonProperty.EFCore.Base.Serializers.JsonSerializers.Strict
         public IList<T>? Deserialize(string? json)
         {
             IList<T>? resList = null;
-            var res = JsonConvert.DeserializeObject<IEnumerable<object[]>>(json);
+            var res = JsonConvert.DeserializeObject<IEnumerable<object[]>>(json ?? JsonConvert.SerializeObject(new List<object[]>()));
             if (res is not null)
             {
                 int count = res.Count();

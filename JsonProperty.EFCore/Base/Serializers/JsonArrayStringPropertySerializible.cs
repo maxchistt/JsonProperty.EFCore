@@ -6,12 +6,12 @@ using JsonProperty.EFCore.Base.Serializers.JsonSerializers.Unstrict;
 
 namespace JsonProperty.EFCore.Base.Serializers
 {
-    internal class JsonArrayStringPropertySerializer<T> :
+    internal class JsonArrayStringPropertySerializible<T> :
         AbstractStringPropertySerializer, ISerializibleArray<T>
     {
         private IJsonArraySerializer<T> JsonSerializer { get; set; }
 
-        public JsonArrayStringPropertySerializer(object parent, string? propName) : base(parent, propName)
+        public JsonArrayStringPropertySerializible(object parent, string? propName) : base(parent, propName)
         {
             JsonSerializer = UseStrictSerialization
                 ? new JsonArrayStrictSerializer<T>()

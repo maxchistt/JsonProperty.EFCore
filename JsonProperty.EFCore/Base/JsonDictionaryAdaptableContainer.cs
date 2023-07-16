@@ -15,7 +15,7 @@ namespace JsonProperty.EFCore.Base
 
         protected JsonDictionaryAdaptableContainer(string? manualPropNameSet)
         {
-            JsonSerializing = new JsonDictionaryStringPropertySerializer<TKey, TValue>(this, manualPropNameSet);
+            JsonSerializing = new JsonDictionaryStringPropertySerializible<TKey, TValue>(this, manualPropNameSet);
         }
 
         protected JsonDictionaryAdaptableContainer() : this(null)

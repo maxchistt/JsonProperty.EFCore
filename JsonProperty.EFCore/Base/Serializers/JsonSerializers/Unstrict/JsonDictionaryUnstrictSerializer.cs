@@ -3,7 +3,7 @@ using Newtonsoft.Json;
 
 namespace JsonProperty.EFCore.Base.Serializers.JsonSerializers.Unstrict
 {
-    internal class JsonDictionaryUnstrictSerializer<TKey, TValue> : IJsonDictionarySerializer<TKey, TValue>
+    internal class JsonDictionaryUnstrictSerializer<TKey, TValue> : IJsonDictionarySerializer<TKey, TValue> where TKey : notnull
     {
         public string Serialize(IDictionary<TKey, TValue> items)
         {
@@ -12,7 +12,7 @@ namespace JsonProperty.EFCore.Base.Serializers.JsonSerializers.Unstrict
 
         public IDictionary<TKey, TValue>? Deserialize(string? prop)
         {
-            return JsonConvert.DeserializeObject<IDictionary<TKey, TValue>>(prop);
+            return JsonConvert.DeserializeObject<IDictionary<TKey, TValue>>(prop ?? JsonConvert.SerializeObject(new Dictionary<TKey, TValue>()));
         }
     }
 }

@@ -15,7 +15,7 @@ namespace JsonProperty.EFCore.Base
 
         protected JsonListAdaptableContainer(string? manualPropNameSet)
         {
-            JsonSerializing = new JsonArrayStringPropertySerializer<T_ListItem>(this, manualPropNameSet);
+            JsonSerializing = new JsonArrayStringPropertySerializible<T_ListItem>(this, manualPropNameSet);
         }
 
         protected JsonListAdaptableContainer() : this(null)

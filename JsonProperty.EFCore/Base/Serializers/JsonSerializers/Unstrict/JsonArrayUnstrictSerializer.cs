@@ -7,7 +7,7 @@ namespace JsonProperty.EFCore.Base.Serializers.JsonSerializers.Unstrict
     {
         public IList<T>? Deserialize(string? json)
         {
-            return JsonConvert.DeserializeObject<IList<T>>(json);
+            return JsonConvert.DeserializeObject<IList<T>>(json ?? JsonConvert.SerializeObject(new List<T>()));
         }
 
         public string Serialize(IEnumerable<T> items)
