@@ -55,7 +55,7 @@ Here are few steps how to use JsonProperty.EFCore project:
    }
    ```
 
-1. **Add JSON field property of type `JsonEnumerable`, `JsonList` or `JsonDictionary` to your entity model**
+1. **Add JSON field property of type `JsonEnumerable`, `JsonList`, `JsonDictionary` or `JsonItem` to your entity model**
 
    You can use the basic type like `JsonEnumerable` or `JsonDictionary` which uses elements of type object
 
